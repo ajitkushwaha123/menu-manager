@@ -274,7 +274,7 @@ export default function MagicScaleAgreementPDF({
           <Text style={styles.paragraph}>
             The Client agrees to pay the Consultant a{" "}
             <Text style={styles.blueBold}>
-              service fee of {getAmount(agreement.fee)}
+              service fee of {getAmount(agreement.fee)}.{" "}
             </Text>
             <Text style={styles.paragraph}>
               A <Text style={styles.blueBold}>weekly</Text> advertising budget
