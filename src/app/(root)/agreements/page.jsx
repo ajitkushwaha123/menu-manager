@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { format } from "date-fns";
 import { AgreementSheet } from "@/components/global/agreement-sheet";
-import { formatDate } from "@/pages/agreement/helper/utils";
+import { formatDate } from "@/lib/agreement-utils";
 
 const PDFPreviewer = dynamic(
   () => import("@/components/global/pdf-previewer"),
