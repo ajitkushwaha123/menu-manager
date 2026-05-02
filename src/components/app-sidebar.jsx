@@ -137,8 +137,13 @@ const data = {
   ],
   projects: [
     {
-      name: "Agreements",
+      name: "Account Handling Agreement",
       url: "/agreements",
+      icon: Frame,
+    },
+    {
+      name: "Setup Agreement",
+      url: "/setup-agreement",
       icon: Frame,
     },
     {

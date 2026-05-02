@@ -3,13 +3,18 @@
 import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { format } from "date-fns";
-import { AgreementSheet } from "@/components/global/agreement-sheet";
-import { formatDate } from "@/pages/agreement/helper/utils";
+import { SetupAgreementSheet } from "@/components/global/agreement-sheet/setup-agreement-sheet";
 
 const PDFPreviewer = dynamic(
   () => import("@/components/global/pdf-previewer"),
   { ssr: false }
 );
+
+// We need to pass a different PDF component to the previewer
+// Since PDFPreviewer is hardcoded to use MagicScaleAgreementPDF currently, 
+// I should probably update PDFPreviewer to accept the PDF component as a prop
+// OR create a specialized SetupPDFPreviewer.
+// Let's check PDFPreviewer again.
 
 const COMPANY = {
   name: "Magicscale Restaurant Consultancy Services",
@@ -30,28 +35,11 @@ const INITIAL_STATE = {
   },
   agreement: {
     date: new Date(),
-    start: new Date(new Date().setDate(new Date().getDate() + 3)),
-    end: new Date(
-      new Date(new Date().setDate(new Date().getDate() + 3)).setMonth(
-        new Date().getMonth() + 1
-      )
-    ),
-    targetLowerBound: 60000,
-    targetUpperBound: 80000,
-    isFixedTarget: false,
-    duration: "1",
-    services: "zomato",
-    fee: 7000,
-  },
-  payment: {
-    term: "partial",
-    firstHalf: "50",
-    secondHalf: "50",
-    secondHalfDueDate: new Date(),
+    fee: 8499,
   },
 };
 
-export default function AgreementPreviewPage() {
+export default function SetupAgreementPage() {
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   const handleAgreementSubmit = (data) => {
@@ -61,32 +49,29 @@ export default function AgreementPreviewPage() {
   const formattedAgreement = useMemo(() => ({
     ...formData.agreement,
     date: format(formData.agreement.date, "dd MMM yyyy").toUpperCase(),
-    start: formatDate(formData.agreement.start),
-    end: formatDate(formData.agreement.end),
   }), [formData.agreement]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-zinc-50 dark:bg-zinc-900 p-6">
-      {/* Header Section */}
       <div className="flex w-full max-w-6xl justify-between items-center mb-4">
         <h1 className="text-xl font-semibold text-zinc-800 dark:text-white">
-          Account Handling Agreement Preview
+          Setup Agreement Preview
         </h1>
 
-        <AgreementSheet
+        <SetupAgreementSheet
           initialClient={formData.client}
           initialAgreement={formData.agreement}
-          initialPayment={formData.payment}
           onSubmit={handleAgreementSubmit}
         />
       </div>
 
       <div className="w-full max-w-6xl h-[85vh] border border-zinc-300 dark:border-zinc-800 rounded-lg overflow-hidden shadow-lg">
+        {/* We need to tell PDFPreviewer to use SetupAgreementPDF */}
         <PDFPreviewer
+          type="setup"
           company={COMPANY}
           client={formData.client}
           agreement={formattedAgreement}
-          payment={formData.payment}
         />
       </div>
     </div>

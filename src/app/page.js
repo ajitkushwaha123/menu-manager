@@ -3,9 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { format } from "date-fns";
-import MagicScaleAgreementPDF from "@/components/document";
 import { AgreementSheet } from "@/components/global/agreement-sheet";
-import { pdf } from "@react-pdf/renderer";
 
 const PDFPreviewer = dynamic(
   () => import("@/components/global/pdf-previewer"),
@@ -60,15 +58,17 @@ export default function AgreementPreviewPage() {
     signature: "/assets/signature.png",
   };
 
-  const [payment] = useState({
+  const [payment, setPayment] = useState({
     term: "advance",
     firstHalf: "50",
     secondHalf: "50",
+    secondHalfDueDate: new Date(),
   });
 
   const handleAgreementSubmit = (data) => {
     setClient(data.client);
     setAgreement(data.agreement);
+    setPayment(data.payment);
   };
 
   const formattedAgreement = {
@@ -79,6 +79,9 @@ export default function AgreementPreviewPage() {
   };
 
   const handleDownloadPDF = async () => {
+    const { pdf } = await import("@react-pdf/renderer");
+    const MagicScaleAgreementPDF = (await import("@/components/document")).default;
+
     const blob = await pdf(
       <MagicScaleAgreementPDF
         company={COMPANY}
@@ -109,7 +112,12 @@ export default function AgreementPreviewPage() {
             Download PDF
           </button>
 
-          <AgreementSheet onSubmit={handleAgreementSubmit} />
+          <AgreementSheet
+            initialClient={client}
+            initialAgreement={agreement}
+            initialPayment={payment}
+            onSubmit={handleAgreementSubmit}
+          />
         </div>
       </div>
 
