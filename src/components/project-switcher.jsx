@@ -23,12 +23,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { useClientAuthData } from "@/lib/auth/client-auth";
-import { useProject } from "@/store/hooks/useProject";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import ProjectPopover from "./global/project/project-popover";
 
 function ProjectSkeleton() {
   return (
@@ -67,7 +62,7 @@ export function ProjectSwitcher() {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight min-w-0">
                 <span className="truncate font-medium max-w-[120px]">
-                  MAGICSCALE MANAGER
+                  MENU MANAGER
                 </span>
                 <span className="truncate text-xs text-muted-foreground max-w-[140px]">
                   {"Project Workspace"}

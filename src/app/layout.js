@@ -1,5 +1,5 @@
-import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Poppins } from "next/font/google";
 import AppShell from "@/components/global/app-shell";
 
 const poppins = Poppins({

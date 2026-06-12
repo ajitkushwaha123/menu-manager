@@ -137,19 +137,9 @@ const data = {
   ],
   projects: [
     {
-      name: "Account Handling Agreement",
-      url: "/agreements",
+      name: "MENU",
+      url: "/menu",
       icon: Frame,
-    },
-    {
-      name: "Setup Agreement",
-      url: "/setup-agreement",
-      icon: Frame,
-    },
-    {
-      name: "Email",
-      url: "/web-mail/inbox",
-      icon: PieChart,
     },
   ],
 };
