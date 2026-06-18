@@ -12,4 +12,10 @@ export const MenuService = {
                 "Content-Type": "multipart/form-data",
             },
         }),
+    swiggyImageUpload: (resId, formData) =>
+        api.post(API_ENDPOINTS.MENU.SWIGGY_IMAGE_UPLOAD(resId), formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        }),
 };

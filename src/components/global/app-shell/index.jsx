@@ -6,7 +6,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { store } from "@/store";
-import NotificationBar from "../notifications/notification-bar";
 import { SiteHeader } from "@/components/site-header";
 
 const AppShell = ({ children }) => {
@@ -23,7 +22,6 @@ const AppShell = ({ children }) => {
             <AppSidebar variant="inset" />
 
             <SidebarInset className="flex flex-1 flex-col min-w-0">
-              <NotificationBar />
               <SiteHeader />
               <main className="flex-1 min-w-0">{children}</main>
             </SidebarInset>

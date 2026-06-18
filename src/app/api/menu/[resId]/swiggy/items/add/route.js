@@ -6,11 +6,11 @@ import { buildItemPayload } from "@/lib/payload/swiggy/add-items";
 const REQUIRED_FIELDS = [
     "name",
     "price",
-    "mainCategoryId",
-    "mainCategoryName",
+    "categoryId",
+    "categoryName",
     "subCategoryId",
     "subCategoryName",
-    "foodType",
+    "is_veg",
     "description"
 ];
 
@@ -19,14 +19,18 @@ export async function POST(request, { params }) {
         const { resId } = await params;
         const body = await request.json();
 
+        console.log("BOdy", body)
         validateRequiredFields(body, REQUIRED_FIELDS);
 
         const payload = buildItemPayload(body);
+        console.log("Payload", payload)
         const response = await SwiggyClient({
             endpoint: `/api/cms/menu-revision/v1/item/${resId}`,
             method: "POST",
             data: payload,
         });
+
+        console.log("Response", response);
 
         return NextResponse.json({
             response,

@@ -2,12 +2,13 @@ import { NextResponse } from "next/server";
 import { SwiggyClient } from "@/lib/api/swiggy-client";
 import { validateRequiredFields } from "@/lib/payload/helper";
 
-const SUB_CATEGORY_POST_REQUIRED_FIELDS = ["name", "type", "parentCategoryId"];
+const SUB_CATEGORY_POST_REQUIRED_FIELDS = ["name", "categoryId"];
 const SUB_CATEGORY_DELETE_REQUIRED_FIELDS = ["sub_category_ids"];
-const SUB_CATEGORY_UPDATE_REQUIRED_FIELDS = ["name", "type", "category_id"];
+const SUB_CATEGORY_UPDATE_REQUIRED_FIELDS = ["name", "categoryId"];
 
 export async function POST(request, { params }) {
     try {
+        console.log("Add New Category")
         const { resId } = await params;
         const body = await request.json();
 
@@ -15,8 +16,8 @@ export async function POST(request, { params }) {
 
         const payload = {
             "name": body.name,
-            "type": body.type,
-            "parentCategoryId": body.parentCategoryId,
+            "type": "SubCat",
+            "parentCategoryId": body.categoryId,
             "insightMappings": body.insightMappings,
         }
 
@@ -96,11 +97,11 @@ export async function PUT(request, { params }) {
 
         const payload = {
             "category_name": body.name,
-            "type": body.type,
+            "type": "SubCat",
         }
 
         const response = await SwiggyClient({
-            endpoint: `/api/cms/menu-revision/v1/${resId}/category/${body?.category_id}`,
+            endpoint: `/api/cms/menu-revision/v1/${resId}/category/${body?.id}`,
             method: "PUT",
             data: payload,
         });

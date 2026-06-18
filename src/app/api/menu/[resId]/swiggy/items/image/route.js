@@ -14,17 +14,43 @@ export async function POST(request) {
     try {
         const incomingForm = await request.formData();
 
-        const image = incomingForm.get("image");
+        let image = incomingForm.get("image");
+        const imageUrl = incomingForm.get("imageUrl");
         const itemName = incomingForm.get("itemName");
 
-        if (!image) {
+        if (!image && !imageUrl) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "image is required",
+                    message: "image or imageUrl is required",
                 },
                 { status: 400 }
             );
+        }
+
+        let imageBuffer;
+        let imageType = "image/jpeg";
+        let imageNameStr = `${itemName}.jpg`;
+
+        if (image) {
+            imageBuffer = Buffer.from(await image.arrayBuffer());
+            imageType = image.type || "image/jpeg";
+            imageNameStr = image.name || imageNameStr;
+        } else if (imageUrl) {
+            try {
+                const imgResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+                imageBuffer = Buffer.from(imgResponse.data);
+                imageType = imgResponse.headers['content-type'] || "image/jpeg";
+                imageNameStr = imageUrl.split('/').pop().split('?')[0] || imageNameStr;
+            } catch (err) {
+                return NextResponse.json(
+                    {
+                        success: false,
+                        message: "Failed to download image from provided URL",
+                    },
+                    { status: 400 }
+                );
+            }
         }
 
         if (!itemName) {
@@ -38,7 +64,7 @@ export async function POST(request) {
         }
 
         const imagePath = generateImagePath(
-            image.name || `${itemName}.jpg`
+            imageNameStr
         );
 
         /**
@@ -84,9 +110,7 @@ export async function POST(request) {
          * STEP 2
          * Upload binary to S3
          */
-        const buffer = Buffer.from(
-            await image.arrayBuffer()
-        );
+        const buffer = imageBuffer;
 
         await axios.put(
             presigned_url,
@@ -94,8 +118,7 @@ export async function POST(request) {
             {
                 headers: {
                     "Content-Type":
-                        image.type ||
-                        "image/jpeg",
+                        imageType,
 
                     "Content-Length":
                         buffer.length,

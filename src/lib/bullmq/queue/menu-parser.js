@@ -1,10 +1,6 @@
-import Redis from "ioredis";
-import dotenv from "dotenv";
 import { Queue } from "bullmq";
-
-dotenv.config();
-const connection = new Redis(process.env.REDIS_URL);
+import { redisConnection } from "../redis.js";
 
 export const menuParserQueue = new Queue("menuParserQueue", {
-    connection,
+    connection: redisConnection,
 });

@@ -40,7 +40,7 @@ const menuSchema = {
                                                 nullable: true
                                             },
 
-                                            foodType: {
+                                            is_veg: {
                                                 type: "STRING",
                                                 enum: ["VEG", "NON_VEG", "EGG", "UNKNOWN"]
                                             },
@@ -50,23 +50,23 @@ const menuSchema = {
                                                 items: {
                                                     type: "OBJECT",
                                                     properties: {
-                                                        name: { type: "STRING" },
+                                                        property_name: { type: "STRING" },
                                                         options: {
                                                             type: "ARRAY",
                                                             items: {
                                                                 type: "OBJECT",
                                                                 properties: {
-                                                                    name: { type: "STRING" },
+                                                                    option_name: { type: "STRING" },
                                                                     price: {
                                                                         type: "NUMBER",
                                                                         nullable: true
                                                                     }
                                                                 },
-                                                                required: ["name"]
+                                                                required: ["option_name"]
                                                             }
                                                         }
                                                     },
-                                                    required: ["name"]
+                                                    required: ["property_name"]
                                                 }
                                             }
                                         },
@@ -111,7 +111,7 @@ FIELD HANDLING RULES
    Example:
    "Crispy chicken burger with spicy mayo and lettuce"
 
-6. foodType:
+6. is_veg:
    - Set based on visible clues:
      - VEG → vegetarian items
      - NON_VEG → chicken, mutton, fish, meat
@@ -131,7 +131,7 @@ STRICT RULES
 ------------------------
 
 9. NEVER leave description empty.
-10. NEVER leave foodType empty.
+10. NEVER leave is_veg empty.
 11. NEVER fabricate prices.
 12. NEVER create fake variants or options.
 13. If unsure → prefer null (only for price).

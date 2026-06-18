@@ -1,170 +1,47 @@
 {
-    "res_id": "21047451",
-    "update_menu": {
-        "menuEntityTaxes": [
-            {
-                "entityType": "CATALOGUE",
-                "entityId": "794687206",
-                "taxGroupIds": [
-                    1
-                ],
-                "entityTaxes": []
-            },
-            {
-                "entityType": "CATALOGUE",
-                "entityId": "794687207",
-                "taxGroupIds": [
-                    1
-                ],
-                "entityTaxes": []
-            },
-            {
-                "entityType": "CATALOGUE",
-                "entityId": "794695907",
-                "taxGroupIds": [
-                    1
-                ],
-                "entityTaxes": []
-            },
-            {
-                "entityType": "CATALOGUE",
-                "entityId": "794729085",
-                "taxGroupIds": [
-                    1
-                ],
-                "entityTaxes": []
-            },
-            {
-                "entityType": "CATALOGUE",
-                "entityId": "794729586",
-                "taxGroupIds": [
-                    1
-                ],
-                "entityTaxes": []
-            }
-        ],
-        "menuEntityCharges": [],
+    "success": true,
+    "message": "Menu fetched successfully",
+    "data": {
+        "resId": "21047451",
         "categoryWrappers": [
             {
                 "category": {
-                    "categoryId": "60521527",
-                    "tempReferenceId": "",
+                    "categoryId": "60562607",
                     "resId": "21047451",
-                    "name": "Desserts",
-                    "order": 1,
-                    "hasTiming": false
+                    "name": "Special Desserts",
+                    "order": 1
                 },
-                "timings": [],
-                "timingsV2": [],
                 "subCategoryWrappers": [
                     {
                         "subCategory": {
-                            "subCategoryId": "86671563",
-                            "name": "Desserts",
+                            "subCategoryId": "86725427",
+                            "name": "Mithai",
                             "order": 1,
-                            "categoryId": "60521527",
-                            "tempReferenceId": ""
+                            "categoryId": "60562607"
                         },
                         "subCategoryEntities": [
                             {
-                                "id": "938812022",
-                                "subCategoryId": "86671563",
+                                "id": "939252956",
+                                "subCategoryId": "86725427",
                                 "entityType": "catalogue",
-                                "entityId": "794687206",
+                                "entityId": "795164139",
                                 "order": 1
-                            },
-                            {
-                                "id": "938812023",
-                                "subCategoryId": "86671563",
-                                "entityType": "catalogue",
-                                "entityId": "794687207",
-                                "order": 2
                             }
                         ]
-                    }
-                ],
-                "categoryServices": [
-                    {
-                        "categoryId": "60521527",
-                        "service": "DELIVERY",
-                        "status": "ENABLED",
-                        "id": "154799176"
-                    }
-                ]
-            },
-            {
-                "category": {
-                    "categoryId": "60522316",
-                    "tempReferenceId": "",
-                    "resId": "21047451",
-                    "name": "Main Course",
-                    "order": 2,
-                    "hasTiming": false
-                },
-                "timings": [],
-                "timingsV2": [],
-                "subCategoryWrappers": [
+                    },
                     {
                         "subCategory": {
-                            "subCategoryId": "86672638",
-                            "name": "Kadhai Paneer",
-                            "order": 1,
-                            "categoryId": "60522316",
-                            "tempReferenceId": ""
+                            "subCategoryId": "86725656",
+                            "name": "Rasgulla",
+                            "order": 2,
+                            "categoryId": "60562607"
                         },
                         "subCategoryEntities": [
                             {
-                                "id": "938820800",
-                                "subCategoryId": "86672638",
+                                "id": "939254862",
+                                "subCategoryId": "86725656",
                                 "entityType": "catalogue",
-                                "entityId": "794695907",
-                                "order": 1
-                            },
-                            {
-                                "id": "938858930",
-                                "subCategoryId": "86672638",
-                                "entityType": "catalogue",
-                                "entityId": "794729085",
-                                "order": 2
-                            }
-                        ]
-                    }
-                ],
-                "categoryServices": [
-                    {
-                        "categoryId": "60522316",
-                        "service": "DELIVERY",
-                        "status": "ENABLED",
-                        "id": "154800964"
-                    }
-                ]
-            },
-            {
-                "category": {
-                    "categoryId": "60525495",
-                    "tempReferenceId": "",
-                    "resId": "21047451",
-                    "name": "Juice",
-                    "order": 3,
-                    "hasTiming": false
-                },
-                "timings": [],
-                "timingsV2": [],
-                "subCategoryWrappers": [
-                    {
-                        "subCategory": {
-                            "subCategoryId": "86676933",
-                            "name": "Juices",
-                            "order": 1,
-                            "categoryId": "60525495",
-                            "tempReferenceId": ""
-                        },
-                        "subCategoryEntities": [
-                            {
-                                "id": "938859445",
-                                "subCategoryId": "86676933",
-                                "entityType": "catalogue",
-                                "entityId": "794729586",
+                                "entityId": "795166111",
                                 "order": 1
                             }
                         ]
@@ -172,10 +49,10 @@
                 ],
                 "categoryServices": [
                     {
-                        "categoryId": "60525495",
+                        "categoryId": "60562607",
                         "service": "DELIVERY",
                         "status": "ENABLED",
-                        "id": "154806526"
+                        "id": "154879017"
                     }
                 ]
             }
@@ -183,103 +60,84 @@
         "catalogueWrappers": [
             {
                 "catalogue": {
-                    "catalogueId": "794687206",
+                    "catalogueId": "795166111",
                     "resId": "21047451",
-                    "name": "Gulab Jamun",
-                    "hasProperties": false,
+                    "name": "Gajar Halwa",
+                    "imageUrl": "https://b.zmtcdn.com/data/dish_photos/5d6/3d884230e87ff777066ae8fefd5315d6.jpg",
                     "isVisible": true,
+                    "nameSlug": "gajarhalwa",
+                    "imageHash": "3d884230e87ff777066ae8fefd5315d6.jpg",
+                    "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/5d6/3d884230e87ff777066ae8fefd5315d6.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                    "isRootCatalogue": true,
+                    "inStock": true,
                     "media": [
                         {
-                            "id": "641134151",
+                            "id": "642142565",
                             "mediaType": "PHOTO",
-                            "mediaId": "7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
+                            "mediaId": "3d884230e87ff777066ae8fefd5315d6.jpg",
                             "order": 1,
-                            "onHoldStatus": 2,
                             "usageType": "FOODSHOT",
                             "entityType": "CATALOGUE",
-                            "entityId": "794687206",
-                            "url": "https://b.zmtcdn.com/data/dish_photos/dd5/7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
-                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/dd5/7f5ba154990f0b0ff1815c2b1cd05dd5.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                            "comment": "Tags - All components of the dish are not clearly visible in the image",
-                            "fileDirectory": "data/dish_photos/dd5/",
+                            "entityId": "795166111",
+                            "url": "https://b.zmtcdn.com/data/dish_photos/5d6/3d884230e87ff777066ae8fefd5315d6.jpg",
+                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/5d6/3d884230e87ff777066ae8fefd5315d6.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                            "fileDirectory": "data/dish_photos/5d6/",
                             "source": "MS_MENU_TOOL",
-                            "fileName": "7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
-                            "mediaTags": [
-                                {
-                                    "tagSlug": "stock_image"
-                                }
-                            ],
+                            "fileName": "3d884230e87ff777066ae8fefd5315d6.jpg",
                             "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
                         }
                     ],
+                    "category": [],
                     "templateType": "TT_DEFAULT",
-                    "turnOnTime": "2026-06-06 10:12:13",
-                    "onHoldStatus": 2,
-                    "description": "[veg preparation] Tasty gulab jamun",
-                    "isRefrigerationRequired": false
-                },
-                "catalogueTags": [
-                    "veg",
-                    "services",
-                    "category-slab-1"
-                ],
-                "variantWrappers": [
-                    {
-                        "variant": {
-                            "variantId": "1060259895",
-                            "turnOnTime": "2026-06-06 10:12:13",
-                            "catalogueId": "794687206"
+                    "config": [],
+                    "turnOnTime": "2026-06-09 07:45:32",
+                    "tagsWithStatus": [
+                        {
+                            "slug": "veg",
+                            "tagId": 1
                         },
-                        "variantModifierGroupMaps": [],
-                        "variantPrices": [
-                            {
-                                "variantId": "1060259895",
-                                "service": "delivery",
-                                "isVisible": true,
-                                "maxAllowedPrice": 300,
-                                "basePrice": 200,
-                                "historyPrice": 199,
-                                "price": 200
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "catalogue": {
-                    "catalogueId": "794687207",
-                    "resId": "21047451",
-                    "name": "Halwa",
-                    "hasProperties": false,
-                    "isVisible": true,
-                    "media": [
                         {
-                            "id": "641134152",
-                            "mediaType": "PHOTO",
-                            "mediaId": "7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
-                            "order": 1,
-                            "onHoldStatus": 2,
-                            "usageType": "FOODSHOT",
-                            "entityType": "CATALOGUE",
-                            "entityId": "794687207",
-                            "url": "https://b.zmtcdn.com/data/dish_photos/dd5/7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
-                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/dd5/7f5ba154990f0b0ff1815c2b1cd05dd5.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                            "comment": "Tags - All components of the dish are not clearly visible in the image",
-                            "fileDirectory": "data/dish_photos/dd5/",
-                            "source": "MS_MENU_TOOL",
-                            "fileName": "7f5ba154990f0b0ff1815c2b1cd05dd5.jpg",
-                            "mediaTags": [
-                                {
-                                    "tagSlug": "stock_image"
-                                }
-                            ],
-                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
+                            "slug": "services",
+                            "tagId": 455
+                        },
+                        {
+                            "slug": "category-slab-1",
+                            "tagId": 577
+                        },
+                        {
+                            "slug": "sf-mithai",
+                            "tagId": 590
                         }
                     ],
-                    "templateType": "TT_DEFAULT",
-                    "turnOnTime": "2026-06-06 10:12:13",
-                    "description": "[veg preparation] Traditional Indian halwa",
-                    "isRefrigerationRequired": false,
+                    "imageUrlV2": "https://b.zmtcdn.com/data/dish_photos/5d6/3d884230e87ff777066ae8fefd5315d6.jpg",
+                    "nutritionalInfo": {
+                        "nutritionInfo": {
+                            "nutritionInfo": {
+                                "score": 25,
+                                "macroNutrients": [
+                                    {
+                                        "nutrientType": "PROTEIN",
+                                        "weightedNutrientValue": 0.0299999993
+                                    },
+                                    {
+                                        "nutrientType": "CARBOHYDRATE",
+                                        "weightedNutrientValue": 0.273333341
+                                    },
+                                    {
+                                        "nutrientType": "FAT",
+                                        "weightedNutrientValue": 0.113333337
+                                    },
+                                    {
+                                        "nutrientType": "FIBER",
+                                        "weightedNutrientValue": 0.0199999996
+                                    }
+                                ],
+                                "isWeightedFactorDependent": true,
+                                "weightFactor": 150,
+                                "weightedCalories": 2.23333335
+                            }
+                        }
+                    },
                     "servingSizeV2": {
                         "servingInfoUnit": "gm"
                     },
@@ -291,253 +149,174 @@
                     },
                     "baseVariantHealthyInfo": {
                         "nutritionalInfo": {
-                            "score": 11,
+                            "score": 25,
                             "macroNutrients": [
                                 {
                                     "nutrientType": "PROTEIN",
-                                    "weightedNutrientValue": 0.0222222228
+                                    "weightedNutrientValue": 0.0299999993
                                 },
                                 {
                                     "nutrientType": "CARBOHYDRATE",
-                                    "weightedNutrientValue": 0.25
+                                    "weightedNutrientValue": 0.273333341
                                 },
                                 {
                                     "nutrientType": "FAT",
-                                    "weightedNutrientValue": 0.100000001
+                                    "weightedNutrientValue": 0.113333337
                                 },
                                 {
                                     "nutrientType": "FIBER",
-                                    "weightedNutrientValue": 0.0111111114
+                                    "weightedNutrientValue": 0.0199999996
                                 }
                             ],
                             "isWeightedFactorDependent": true,
-                            "weightFactor": 180,
-                            "weightedCalories": 1.98888886
+                            "weightFactor": 150,
+                            "weightedCalories": 2.23333335
                         }
                     }
                 },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "variantId": "1060849618",
+                            "catalogueId": "795166111",
+                            "inStock": true,
+                            "turnOnTime": "2026-06-09 07:45:32"
+                        },
+                        "variantPrices": [
+                            {
+                                "id": "1717273539",
+                                "variantId": "1060849618",
+                                "service": "delivery",
+                                "price": 200,
+                                "isVisible": true,
+                                "maxAllowedPrice": 225,
+                                "basePrice": 200,
+                                "historyPrice": 150
+                            }
+                        ]
+                    }
+                ],
                 "catalogueTags": [
                     "veg",
                     "services",
                     "category-slab-1",
                     "sf-mithai"
-                ],
-                "variantWrappers": [
-                    {
-                        "variant": {
-                            "variantId": "1060259896",
-                            "turnOnTime": "2026-06-06 10:12:13",
-                            "catalogueId": "794687207"
-                        },
-                        "variantModifierGroupMaps": [],
-                        "variantPrices": [
-                            {
-                                "variantId": "1060259896",
-                                "service": "delivery",
-                                "isVisible": true,
-                                "maxAllowedPrice": 225,
-                                "basePrice": 150,
-                                "historyPrice": 150,
-                                "price": 150
-                            }
-                        ]
-                    }
                 ]
             },
             {
                 "catalogue": {
-                    "catalogueId": "794695907",
+                    "catalogueId": "795164139",
                     "resId": "21047451",
-                    "name": "Kadhai paneer",
-                    "hasProperties": false,
-                    "isVisible": true,
-                    "media": [
-                        {
-                            "id": "641149496",
-                            "mediaType": "PHOTO",
-                            "mediaId": "6e648458cfdc6b2bf67dab0971ba8a93.jpg",
-                            "order": 1,
-                            "usageType": "FOODSHOT",
-                            "entityType": "CATALOGUE",
-                            "entityId": "794695907",
-                            "url": "https://b.zmtcdn.com/data/dish_photos/a93/6e648458cfdc6b2bf67dab0971ba8a93.jpg",
-                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/a93/6e648458cfdc6b2bf67dab0971ba8a93.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                            "fileDirectory": "data/dish_photos/a93/",
-                            "source": "MS_MENU_TOOL",
-                            "fileName": "6e648458cfdc6b2bf67dab0971ba8a93.jpg",
-                            "mediaTags": [
-                                {
-                                    "tagSlug": "stock_image"
-                                }
-                            ],
-                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
-                        }
-                    ],
-                    "templateType": "TT_DEFAULT",
-                    "turnOnTime": "2026-06-06 11:15:13",
-                    "description": "[Veg preparation]",
-                    "isRefrigerationRequired": false
-                },
-                "catalogueTags": [
-                    "veg",
-                    "services",
-                    "sf-not-vegan"
-                ],
-                "variantWrappers": [
-                    {
-                        "variant": {
-                            "variantId": "1060275055",
-                            "turnOnTime": "2026-06-06 11:27:30",
-                            "catalogueId": "794695907"
-                        },
-                        "variantModifierGroupMaps": [],
-                        "variantPrices": [
-                            {
-                                "variantId": "1060275055",
-                                "service": "delivery",
-                                "isVisible": true,
-                                "maxAllowedPrice": 150,
-                                "basePrice": 100,
-                                "price": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "catalogue": {
-                    "catalogueId": "794729085",
-                    "resId": "21047451",
-                    "name": "Watermelon Juice",
-                    "hasProperties": false,
-                    "isVisible": true,
-                    "media": [
-                        {
-                            "id": "641204363",
-                            "mediaType": "PHOTO",
-                            "mediaId": "69204931d0d1bccd91c850fec34f8707.jpg",
-                            "order": 1,
-                            "onHoldStatus": 2,
-                            "usageType": "FOODSHOT",
-                            "entityType": "CATALOGUE",
-                            "entityId": "794729085",
-                            "url": "https://b.zmtcdn.com/data/dish_photos/707/69204931d0d1bccd91c850fec34f8707.jpg",
-                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/707/69204931d0d1bccd91c850fec34f8707.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                            "comment": "Tags - All components of the dish are not clearly visible in the image",
-                            "fileDirectory": "data/dish_photos/707/",
-                            "source": "MS_MENU_TOOL",
-                            "fileName": "69204931d0d1bccd91c850fec34f8707.jpg",
-                            "mediaTags": [
-                                {
-                                    "tagSlug": "rejected"
-                                },
-                                {
-                                    "tagSlug": "stock_image"
-                                }
-                            ],
-                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
-                        }
-                    ],
-                    "templateType": "TT_DEFAULT",
-                    "turnOnTime": "2026-06-06 18:31:19",
-                    "onHoldStatus": 2,
-                    "description": "Watermelon juice",
-                    "isRefrigerationRequired": false
-                },
-                "catalogueTags": [
-                    "veg",
-                    "services",
-                    "sf-not-vegan"
-                ],
-                "variantWrappers": [
-                    {
-                        "variant": {
-                            "variantId": "1060317985",
-                            "turnOnTime": "2026-06-06 18:31:19",
-                            "catalogueId": "794729085"
-                        },
-                        "variantModifierGroupMaps": [],
-                        "variantPrices": [
-                            {
-                                "variantId": "1060317985",
-                                "service": "delivery",
-                                "isVisible": true,
-                                "maxAllowedPrice": 300,
-                                "basePrice": 200,
-                                "historyPrice": 200,
-                                "price": 200
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "catalogue": {
-                    "catalogueId": "794729586",
-                    "resId": "21047451",
-                    "name": "Banana Milk Shake",
+                    "name": "Gulab Jamun",
                     "hasProperties": true,
+                    "imageUrl": "https://b.zmtcdn.com/data/dish_photos/036/29d2e57597b57b82ab4c75cad37c8036.jpg",
                     "isVisible": true,
+                    "nameSlug": "gulabjamun",
+                    "imageHash": "29d2e57597b57b82ab4c75cad37c8036.jpg",
+                    "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/036/29d2e57597b57b82ab4c75cad37c8036.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                    "onHoldStatus": 2,
+                    "isRootCatalogue": true,
+                    "inStock": true,
                     "media": [
                         {
-                            "tempReferenceId": "X45KI0411JQFEBUB4R2JJQIHMQ2VTLKI",
-                            "mediaId": "69741275f1c3e937e81a9e6004aee155.jpg",
+                            "id": "641976143",
                             "mediaType": "PHOTO",
-                            "url": "https://b.zmtcdn.com/data/dish_photos/155/69741275f1c3e937e81a9e6004aee155.jpg",
-                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/155/69741275f1c3e937e81a9e6004aee155.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
-                            "isNewlyUploaded": true,
+                            "mediaId": "29d2e57597b57b82ab4c75cad37c8036.jpg",
+                            "order": 1,
                             "usageType": "FOODSHOT",
-                            "mediaTags": [],
-                            "metadata": {
-                                "dimensions": {
-                                    "width": 1800,
-                                    "height": 1200
+                            "entityType": "CATALOGUE",
+                            "entityId": "795164139",
+                            "url": "https://b.zmtcdn.com/data/dish_photos/036/29d2e57597b57b82ab4c75cad37c8036.jpg",
+                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/036/29d2e57597b57b82ab4c75cad37c8036.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                            "fileDirectory": "data/dish_photos/036/",
+                            "source": "MS_MENU_TOOL",
+                            "fileName": "29d2e57597b57b82ab4c75cad37c8036.jpg",
+                            "mediaTags": [
+                                {
+                                    "tagSlug": "stock_image"
                                 }
-                            },
-                            "isStockPhoto": false,
-                            "isZoomed": false,
-                            "isLowScore": false,
-                            "isUploading": false,
-                            "order": 1
+                            ],
+                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
                         }
                     ],
+                    "category": [],
                     "templateType": "TT_DEFAULT",
-                    "turnOnTime": "2026-06-06 18:41:08",
-                    "description": "[veg preparation] Banana shake , with banana",
-                    "isRefrigerationRequired": false
+                    "config": [],
+                    "turnOnTime": "2026-06-09 07:23:15",
+                    "isCustomisable": true,
+                    "tagsWithStatus": [
+                        {
+                            "slug": "veg",
+                            "tagId": 1
+                        },
+                        {
+                            "slug": "services",
+                            "tagId": 455
+                        },
+                        {
+                            "slug": "category-slab-1",
+                            "tagId": 577
+                        },
+                        {
+                            "slug": "sf-mithai",
+                            "tagId": 590
+                        }
+                    ],
+                    "restrictedTags": [
+                        "new-launch"
+                    ],
+                    "imageUrlV2": "https://b.zmtcdn.com/data/dish_photos/036/29d2e57597b57b82ab4c75cad37c8036.jpg"
                 },
-                "catalogueTags": [
-                    "veg",
-                    "services",
-                    "sf-kid-friendly",
-                    "services"
-                ],
                 "cataloguePropertyWrappers": [
                     {
                         "catalogueProperty": {
-                            "propertyId": "98930521",
-                            "catalogueId": "794729586",
+                            "propertyId": "99185818",
+                            "catalogueId": "795164139",
                             "name": "Size",
-                            "order": 1
+                            "order": 1,
+                            "propertyValues": [
+                                {
+                                    "propertyValueId": "254883957",
+                                    "propertyId": "99185818",
+                                    "value": "Small",
+                                    "valueSlug": "small",
+                                    "order": 1
+                                },
+                                {
+                                    "propertyValueId": "254883958",
+                                    "propertyId": "99185818",
+                                    "value": "Medium",
+                                    "valueSlug": "medium",
+                                    "order": 2
+                                },
+                                {
+                                    "propertyValueId": "254883959",
+                                    "propertyId": "99185818",
+                                    "value": "Large",
+                                    "valueSlug": "large",
+                                    "order": 3
+                                }
+                            ],
+                            "nameSlug": "size"
                         },
                         "cataloguePropertyValues": [
                             {
-                                "propertyValueId": "254256158",
-                                "propertyId": "98930521",
+                                "propertyValueId": "254883957",
+                                "propertyId": "99185818",
                                 "value": "Small",
                                 "valueSlug": "small",
                                 "order": 1
                             },
                             {
-                                "propertyValueId": "254256159",
-                                "propertyId": "98930521",
+                                "propertyValueId": "254883958",
+                                "propertyId": "99185818",
                                 "value": "Medium",
                                 "valueSlug": "medium",
                                 "order": 2
                             },
                             {
-                                "propertyValueId": "254256160",
-                                "propertyId": "98930521",
+                                "propertyValueId": "254883959",
+                                "propertyId": "99185818",
                                 "value": "Large",
                                 "valueSlug": "large",
                                 "order": 3
@@ -548,122 +327,3525 @@
                 "variantWrappers": [
                     {
                         "variant": {
-                            "variantId": "1060318605",
-                            "turnOnTime": "2026-06-06 18:41:08",
-                            "catalogueId": "794729586"
+                            "variantId": "1063071947",
+                            "catalogueId": "795164139",
+                            "inStock": true,
+                            "turnOnTime": "2026-06-18 08:45:51"
                         },
-                        "variantModifierGroupMaps": [],
                         "variantPropertyValues": [
                             {
-                                "id": "459934622",
-                                "propertyValueId": "254256158",
-                                "variantId": "1060318605"
+                                "id": "460648869",
+                                "propertyValueId": "254883957",
+                                "variantId": "1063071947"
                             }
                         ],
                         "variantPrices": [
                             {
-                                "variantId": "1060318605",
+                                "id": "1724079573",
+                                "variantId": "1063071947",
                                 "service": "delivery",
+                                "price": 150,
+                                "isVisible": true,
+                                "maxAllowedPrice": 225,
+                                "basePrice": 150
+                            }
+                        ]
+                    },
+                    {
+                        "variant": {
+                            "variantId": "1063071948",
+                            "catalogueId": "795164139",
+                            "inStock": true,
+                            "turnOnTime": "2026-06-18 08:45:51"
+                        },
+                        "variantPropertyValues": [
+                            {
+                                "id": "460648870",
+                                "propertyValueId": "254883958",
+                                "variantId": "1063071948"
+                            }
+                        ],
+                        "variantPrices": [
+                            {
+                                "id": "1724079574",
+                                "variantId": "1063071948",
+                                "service": "delivery",
+                                "price": 200,
                                 "isVisible": true,
                                 "maxAllowedPrice": 300,
-                                "basePrice": 200,
-                                "historyPrice": 200,
-                                "price": 200
+                                "basePrice": 200
                             }
                         ]
                     },
                     {
                         "variant": {
-                            "variantId": "1060318606",
-                            "turnOnTime": "2026-06-06 18:41:08",
-                            "catalogueId": "794729586"
+                            "variantId": "1063071949",
+                            "catalogueId": "795164139",
+                            "inStock": true,
+                            "turnOnTime": "2026-06-18 08:45:51"
                         },
-                        "variantModifierGroupMaps": [],
                         "variantPropertyValues": [
                             {
-                                "id": "459934623",
-                                "propertyValueId": "254256159",
-                                "variantId": "1060318606"
+                                "id": "460648871",
+                                "propertyValueId": "254883959",
+                                "variantId": "1063071949"
                             }
                         ],
                         "variantPrices": [
                             {
-                                "variantId": "1060318606",
+                                "id": "1724079575",
+                                "variantId": "1063071949",
                                 "service": "delivery",
+                                "price": 250,
                                 "isVisible": true,
                                 "maxAllowedPrice": 375,
-                                "basePrice": 250,
-                                "historyPrice": 250,
-                                "price": 250
+                                "basePrice": 250
                             }
                         ]
-                    },
+                    }
+                ],
+                "catalogueTags": [
+                    "veg",
+                    "services",
+                    "category-slab-1",
+                    "sf-mithai"
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Candles",
+                    "imageUrl": "https://b.zmtcdn.com/data/dish_photos/f6e/68e616bd7615a1eb85eb5275e6bfaf6e.jpg",
+                    "tempReferenceId": "1282745914651133595",
+                    "isVisible": true,
+                    "imageHash": "68e616bd7615a1eb85eb5275e6bfaf6e.jpg",
+                    "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/f6e/68e616bd7615a1eb85eb5275e6bfaf6e.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                    "inStock": true,
+                    "media": [
+                        {
+                            "mediaType": "PHOTO",
+                            "mediaId": "68e616bd7615a1eb85eb5275e6bfaf6e.jpg",
+                            "usageType": "FOODSHOT",
+                            "entityType": "CATALOGUE",
+                            "url": "https://b.zmtcdn.com/data/dish_photos/f6e/68e616bd7615a1eb85eb5275e6bfaf6e.jpg",
+                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/f6e/68e616bd7615a1eb85eb5275e6bfaf6e.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
+                        }
+                    ],
+                    "category": [],
+                    "kind": "cake-birthday-candles",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00",
+                    "imageUrlV2": "https://b.zmtcdn.com/data/dish_photos/f6e/68e616bd7615a1eb85eb5275e6bfaf6e.jpg"
+                },
+                "variantWrappers": [
                     {
                         "variant": {
-                            "variantId": "1060318607",
-                            "turnOnTime": "2026-06-06 18:41:08",
-                            "catalogueId": "794729586"
+                            "tempReferenceId": "1165504304491022662",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
                         },
-                        "variantModifierGroupMaps": [],
-                        "variantPropertyValues": [
-                            {
-                                "id": "459934624",
-                                "propertyValueId": "254256160",
-                                "variantId": "1060318607"
-                            }
-                        ],
                         "variantPrices": [
                             {
-                                "variantId": "1060318607",
-                                "service": "delivery",
-                                "isVisible": true,
-                                "maxAllowedPrice": 450,
-                                "basePrice": 300,
-                                "historyPrice": 300,
-                                "price": 300
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Cake Knife",
+                    "imageUrl": "https://b.zmtcdn.com/data/dish_photos/f27/46db47336d195576dd6efc163e5c4f27.jpg",
+                    "tempReferenceId": "6054536159980298568",
+                    "isVisible": true,
+                    "imageHash": "46db47336d195576dd6efc163e5c4f27.jpg",
+                    "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/f27/46db47336d195576dd6efc163e5c4f27.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                    "inStock": true,
+                    "media": [
+                        {
+                            "mediaType": "PHOTO",
+                            "mediaId": "46db47336d195576dd6efc163e5c4f27.jpg",
+                            "usageType": "FOODSHOT",
+                            "entityType": "CATALOGUE",
+                            "url": "https://b.zmtcdn.com/data/dish_photos/f27/46db47336d195576dd6efc163e5c4f27.jpg",
+                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/f27/46db47336d195576dd6efc163e5c4f27.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
+                        }
+                    ],
+                    "category": [],
+                    "kind": "cake-birthday-knife",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00",
+                    "imageUrlV2": "https://b.zmtcdn.com/data/dish_photos/f27/46db47336d195576dd6efc163e5c4f27.jpg"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "4149125850425834403",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Party Popper",
+                    "imageUrl": "https://b.zmtcdn.com/data/dish_photos/91e/1951d760ca9b823c9348bd1ddcbc891e.jpg",
+                    "tempReferenceId": "4224701134365547121",
+                    "isVisible": true,
+                    "imageHash": "1951d760ca9b823c9348bd1ddcbc891e.jpg",
+                    "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/91e/1951d760ca9b823c9348bd1ddcbc891e.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                    "inStock": true,
+                    "media": [
+                        {
+                            "mediaType": "PHOTO",
+                            "mediaId": "1951d760ca9b823c9348bd1ddcbc891e.jpg",
+                            "usageType": "FOODSHOT",
+                            "entityType": "CATALOGUE",
+                            "url": "https://b.zmtcdn.com/data/dish_photos/91e/1951d760ca9b823c9348bd1ddcbc891e.jpg",
+                            "thumbUrl": "https://b.zmtcdn.com/data/dish_photos/91e/1951d760ca9b823c9348bd1ddcbc891e.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A",
+                            "usageTypeEnum": "USAGE_TYPE_FOODSHOT"
+                        }
+                    ],
+                    "category": [],
+                    "kind": "cake-party-popper",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00",
+                    "imageUrlV2": "https://b.zmtcdn.com/data/dish_photos/91e/1951d760ca9b823c9348bd1ddcbc891e.jpg"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "7856149403781115317",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Balloon Packet",
+                    "tempReferenceId": "7836996636807487287",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "cake-balloon-packet",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "4236280474727073566",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Balloon Heart Shape",
+                    "tempReferenceId": "6939366839589695456",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "cake-balloon-heart-shape",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "7729502737640926459",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Snow Spray",
+                    "tempReferenceId": "7546521004192718888",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "snow-spray",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "4345789902613124215",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Birthday Cap",
+                    "tempReferenceId": "6836354382694596738",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "birthday-cap",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "1272099793190270626",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Birthday Roses",
+                    "tempReferenceId": "7650998514898670621",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "birthday-roses",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "3554319245534143635",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Birthday Bouquet",
+                    "tempReferenceId": "6375628172162347846",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "birthday-bouquet",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "1109770481316845505",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Single Red Rose",
+                    "tempReferenceId": "8667338809792712218",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "single-red-rose",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "8896775580473107634",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Sparkling Candle",
+                    "tempReferenceId": "5115433999739940697",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "sparkling-candle",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "6707092823255897063",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Birthday Mask",
+                    "tempReferenceId": "8825968008700940784",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "birthday-mask",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "633060244312610986",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "On the cake",
+                    "tempReferenceId": "3484849903665059171",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "cake-message-on-the-cake",
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "1099786066315859393",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "On the bottom disc",
+                    "tempReferenceId": "7614720728234835470",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "cake-message-on-bottom-of-cake",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "7496241809839969126",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "catalogue": {
+                    "resId": "21047451",
+                    "name": "Add a separate chocolate disc",
+                    "tempReferenceId": "734164767894033778",
+                    "isVisible": true,
+                    "inStock": true,
+                    "category": [],
+                    "kind": "cake-message-on-chocolate-disc",
+                    "isDisabled": true,
+                    "config": [],
+                    "turnOnTime": "0001-01-01 00:00:00"
+                },
+                "variantWrappers": [
+                    {
+                        "variant": {
+                            "tempReferenceId": "2608570561350102828",
+                            "inStock": true,
+                            "turnOnTime": "0001-01-01 00:00:00"
+                        },
+                        "variantPrices": [
+                            {
+                                "service": "DELIVERY",
+                                "isVisible": true
                             }
                         ]
                     }
                 ]
             }
         ],
-        "modifierGroupWrappers": [],
-        "resDisclaimers": [],
-        "requestedModerationData": {
-            "variantPrices": []
-        },
-        "contentCombos": [],
-        "disclaimers": [],
-        "resId": "21047451",
-        "requestMetadata": {}
-    },
-    "onHoldItems": {
-        "catalogues": {
-            "794687206": {
-                "comments": [
-                    "Information required in pieces, Others - Indian sweets cannot have a Services tag as per compliance regulations."
+        "modifierGroupWrappers": [
+            {
+                "modifierGroup": {
+                    "resId": "21047451",
+                    "name": "Add celebration accessories",
+                    "max": 12,
+                    "allowMulti": true,
+                    "tempReferenceId": "8076265942953385485",
+                    "displayName": "Add celebration accessories",
+                    "maxSelectionsPerItem": 1,
+                    "kind": "cake-accessories",
+                    "onDemandApplicable": true,
+                    "excludeFromGlobal": true
+                },
+                "variantModifierGroupMaps": [
+                    {
+                        "tempReferenceId": "1165504304491022662"
+                    },
+                    {
+                        "tempReferenceId": "4149125850425834403"
+                    },
+                    {
+                        "tempReferenceId": "7856149403781115317"
+                    },
+                    {
+                        "tempReferenceId": "4236280474727073566"
+                    },
+                    {
+                        "tempReferenceId": "7729502737640926459"
+                    },
+                    {
+                        "tempReferenceId": "4345789902613124215"
+                    },
+                    {
+                        "tempReferenceId": "1272099793190270626"
+                    },
+                    {
+                        "tempReferenceId": "3554319245534143635"
+                    },
+                    {
+                        "tempReferenceId": "1109770481316845505"
+                    },
+                    {
+                        "tempReferenceId": "8896775580473107634"
+                    },
+                    {
+                        "tempReferenceId": "6707092823255897063"
+                    },
+                    {
+                        "tempReferenceId": "633060244312610986"
+                    }
                 ]
             },
-            "794729085": {
-                "comments": [
-                    "Others - Item name and menu category does not match"
+            {
+                "modifierGroup": {
+                    "resId": "21047451",
+                    "name": "Where do you want the message",
+                    "max": 1,
+                    "allowMulti": true,
+                    "tempReferenceId": "4563154324247461606",
+                    "displayName": "Where do you want the message",
+                    "maxSelectionsPerItem": 1,
+                    "kind": "cake-message-placement",
+                    "excludeFromGlobal": true
+                },
+                "variantModifierGroupMaps": [
+                    {
+                        "tempReferenceId": "1099786066315859393"
+                    },
+                    {
+                        "tempReferenceId": "7496241809839969126"
+                    },
+                    {
+                        "tempReferenceId": "2608570561350102828"
+                    }
                 ]
             }
-        }
-    },
-    "last_opened_catalogue": {
-        "category": {
-            "tempReferenceId": "",
-            "categoryId": "60525495"
+        ],
+        "tags": [
+            {
+                "tagId": 6,
+                "name": "Beverage",
+                "slug": "beverage",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 478,
+                "name": "Biryani",
+                "slug": "category-biryani",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 60,
+                "name": "Bread",
+                "slug": "bread",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 479,
+                "name": "Burger",
+                "slug": "category-burger",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 691,
+                "name": "Chef Table Collection",
+                "slug": "chef-table-collection",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 9,
+                "name": "Chef's Special",
+                "slug": "chef-special",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/5153c452213eae50063e959c1b9848f41722515014.png"
+            },
+            {
+                "tagId": 483,
+                "name": "Chinese",
+                "slug": "category-chinese",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 10,
+                "name": "Coke",
+                "slug": "coke",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 389,
+                "name": "Combo Item",
+                "slug": "combo-item",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    112,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 569,
+                "name": "Commission Category",
+                "slug": "commission-category",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 514,
+                "name": "Continental",
+                "slug": "category-continental",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 304,
+                "name": "Dairy Free",
+                "slug": "dairy-free",
+                "groupId": 25,
+                "group": {
+                    "groupId": 25,
+                    "name": "Dietary Restrictions",
+                    "slug": "dietary-restrictions",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 62,
+                "name": "Dessert",
+                "slug": "dessert",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 59,
+                "name": "Diet Pepsi",
+                "slug": "diet-pepsi",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 5,
+                "name": "Egg",
+                "slug": "egg",
+                "groupId": 6,
+                "group": {
+                    "groupId": 6,
+                    "name": "Dietary",
+                    "slug": "dietary",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    162,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "SINGLE_SERVE",
+                    "DINE_OUT",
+                    "PACKAGES",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE",
+                    "PARTY"
+                ],
+                "linkedSlugs": [
+                    "allergen-egg"
+                ],
+                "image": "44cbfa9b5b49806d4961311873a456fa1608115225.png"
+            },
+            {
+                "tagId": 16,
+                "name": "Exclusive Offer",
+                "slug": "exclusive-offer",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 384,
+                "name": "FODMAP Friendly",
+                "slug": "fodmap-friendly",
+                "groupId": 25,
+                "group": {
+                    "groupId": 25,
+                    "name": "Dietary Restrictions",
+                    "slug": "dietary-restrictions",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    148
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 19,
+                "name": "Fanta",
+                "slug": "fanta",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 532,
+                "name": "Five-minutes-delivery",
+                "slug": "five-minutes-delivery",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 536,
+                "name": "Freshly Frosted",
+                "slug": "freshly-frosted",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/90be9121a7cc74aa68db07cc5d57b0cd1722515120.png"
+            },
+            {
+                "tagId": 47,
+                "name": "Gluten Free",
+                "slug": "gluten-free",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/f57c9667848b12c9593fd81dbd92947b1722517238.png"
+            },
+            {
+                "tagId": 454,
+                "name": "Goods",
+                "slug": "goods",
+                "groupId": 34,
+                "group": {
+                    "groupId": 34,
+                    "name": "GST Classification",
+                    "slug": "gst-classification",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE",
+                    "PARTY"
+                ]
+            },
+            {
+                "tagId": 431,
+                "name": "Home Style Meal",
+                "slug": "home-style-meal",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 534,
+                "name": "Instant",
+                "slug": "instant",
+                "groupId": 36,
+                "group": {
+                    "groupId": 36,
+                    "name": "Business type",
+                    "slug": "business-type",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 595,
+                "name": "Jain",
+                "slug": "jain",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ],
+                "image": " https://b.zmtcdn.com/data/o2_assets/a5e6ef75d607c40d852fefb8169856341722517870.png"
+            },
+            {
+                "tagId": 20,
+                "name": "Kinley Soda",
+                "slug": "kinley-soda",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 23,
+                "name": "Limca",
+                "slug": "limca",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 15,
+                "name": "Lipton",
+                "slug": "lipton",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 21,
+                "name": "Maaza",
+                "slug": "maaza",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 63,
+                "name": "Main Course",
+                "slug": "main-course",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 13,
+                "name": "Meal",
+                "slug": "meal",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    112,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 382,
+                "name": "Medium Spicy",
+                "slug": "medium-spicy",
+                "groupId": 21,
+                "group": {
+                    "groupId": 21,
+                    "name": "Spice Level",
+                    "slug": "spice-level",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/32bc5be3d2e0b41ba6231b0038b77f561722516630.png"
+            },
+            {
+                "tagId": 381,
+                "name": "Mild",
+                "slug": "mild",
+                "groupId": 21,
+                "group": {
+                    "groupId": 21,
+                    "name": "Spice Level",
+                    "slug": "spice-level",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 22,
+                "name": "Minute Maid",
+                "slug": "minute-maid",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 677,
+                "name": "Mrp Low Comission",
+                "slug": "mrp-low-commission",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 45,
+                "name": "New",
+                "slug": "new",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 476,
+                "name": "New Launch",
+                "slug": "new-launch",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/33cc613e02df024b6ed44ab73e0bae2e1720428734.png"
+            },
+            {
+                "tagId": 2,
+                "name": "Non-Veg",
+                "slug": "non-veg",
+                "groupId": 6,
+                "group": {
+                    "groupId": 6,
+                    "name": "Dietary",
+                    "slug": "dietary",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    94,
+                    162,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "SINGLE_SERVE",
+                    "DINE_OUT",
+                    "PACKAGES",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE",
+                    "PARTY"
+                ],
+                "image": "5b4a73bead38f9b576dcadfc90ca1ce41608114938.png"
+            },
+            {
+                "tagId": 397,
+                "name": "Noodle",
+                "slug": "noodle",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 481,
+                "name": "North Indian",
+                "slug": "category-north-indian",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 12,
+                "name": "Pepsi",
+                "slug": "pepsi",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 674,
+                "name": "Pet food",
+                "slug": "pet-food",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/52c21c6c43fb7eb2488a11a2f034e7061749017327.png"
+            },
+            {
+                "tagId": 480,
+                "name": "Pizza",
+                "slug": "category-pizza",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 535,
+                "name": "Pre Frosted",
+                "slug": "pre-frosted",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/914e2a104681e10ab8eb6e1c5773966a1722518218.png"
+            },
+            {
+                "tagId": 547,
+                "name": "Raw Pressery",
+                "slug": "raw-pressery",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 546,
+                "name": "Red bull",
+                "slug": "red-bull",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 64,
+                "name": "Rice",
+                "slug": "rice",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 8,
+                "name": "Seasonal",
+                "slug": "seasonal",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 455,
+                "name": "Services",
+                "slug": "services",
+                "groupId": 34,
+                "group": {
+                    "groupId": 34,
+                    "name": "GST Classification",
+                    "slug": "gst-classification",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE",
+                    "PARTY"
+                ]
+            },
+            {
+                "tagId": 482,
+                "name": "South Indian",
+                "slug": "category-south-indian",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 7,
+                "name": "Spicy",
+                "slug": "spicy",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 18,
+                "name": "Sprite",
+                "slug": "sprite",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 61,
+                "name": "Starter",
+                "slug": "starter",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 594,
+                "name": "Sugar Free",
+                "slug": "sugar-free",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/9f13fcf47ef02d4253f7d20ae9c6db001722515056.png"
+            },
+            {
+                "tagId": 533,
+                "name": "Ten-minutes-delivery",
+                "slug": "ten-minutes-delivery",
+                "groupId": 1,
+                "group": {
+                    "groupId": 1,
+                    "name": "Miscellaneous",
+                    "slug": "miscellaneous",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 477,
+                "name": "Thali",
+                "slug": "category-thali",
+                "groupId": 9,
+                "group": {
+                    "groupId": 9,
+                    "name": "Category",
+                    "slug": "category",
+                    "displayStyle": "DROPDOWN",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 17,
+                "name": "Thums Up",
+                "slug": "thums-up",
+                "groupId": 4,
+                "group": {
+                    "groupId": 4,
+                    "name": "Beverage",
+                    "slug": "beverage",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 1,
+                "name": "Veg",
+                "slug": "veg",
+                "groupId": 6,
+                "group": {
+                    "groupId": 6,
+                    "name": "Dietary",
+                    "slug": "dietary",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    189,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "INFINITY",
+                    "SINGLE_SERVE",
+                    "DINE_OUT",
+                    "PACKAGES",
+                    "INTERCITY",
+                    "INTRACITY",
+                    "ANYWHERE",
+                    "PARTY"
+                ],
+                "image": "958e4cb4a8b255659daae2c430f976ea1608028693.png"
+            },
+            {
+                "tagId": 48,
+                "name": "Vegan",
+                "slug": "vegan",
+                "groupId": 25,
+                "group": {
+                    "groupId": 25,
+                    "name": "Dietary Restrictions",
+                    "slug": "dietary-restrictions",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    112,
+                    148,
+                    162,
+                    164,
+                    166,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/f2de068a6f09925c1cec0a68543169851722517210.png"
+            },
+            {
+                "tagId": 383,
+                "name": "Very Spicy",
+                "slug": "very-spicy",
+                "groupId": 21,
+                "group": {
+                    "groupId": 21,
+                    "name": "Spice Level",
+                    "slug": "spice-level",
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    208,
+                    214
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "DINE_OUT",
+                    "INTERCITY",
+                    "ANYWHERE"
+                ],
+                "image": "https://b.zmtcdn.com/data/o2_assets/62135e3b248364dc5a077242c25b558b1722516603.png"
+            },
+            {
+                "tagId": 50,
+                "name": "Wheat Free",
+                "slug": "wheat-free",
+                "groupId": 25,
+                "group": {
+                    "groupId": 25,
+                    "name": "Dietary Restrictions",
+                    "slug": "dietary-restrictions",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1,
+                    14,
+                    94,
+                    148,
+                    162,
+                    164,
+                    189,
+                    208
+                ],
+                "services": [
+                    "DELIVERY",
+                    "TAKEAWAY",
+                    "ANYWHERE"
+                ]
+            },
+            {
+                "tagId": 541,
+                "name": "XL items",
+                "slug": "xl-items",
+                "groupId": 26,
+                "group": {
+                    "groupId": 26,
+                    "name": "Speciality",
+                    "slug": "speciality",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_CAKE",
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "EDIT"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 578,
+                "name": "category slab 2",
+                "slug": "category-slab-2",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 585,
+                "name": "category slab 3",
+                "slug": "category-slab-3",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 584,
+                "name": "category slab 4",
+                "slug": "category-slab-4",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 583,
+                "name": "category slab 5",
+                "slug": "category-slab-5",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            },
+            {
+                "tagId": 577,
+                "name": "category-slab-1",
+                "slug": "category-slab-1",
+                "groupId": 41,
+                "group": {
+                    "groupId": 41,
+                    "name": "Commission Category",
+                    "slug": "commission-category",
+                    "multiSelect": true,
+                    "displayStyle": "LIST",
+                    "supportedTemplates": [
+                        "TT_DEFAULT"
+                    ],
+                    "accessLevel": "VIEW"
+                },
+                "countryIds": [
+                    1
+                ],
+                "services": [
+                    "DELIVERY"
+                ]
+            }
+        ],
+        "services": [
+            {
+                "slug": "delivery",
+                "name": "Delivery"
+            }
+        ],
+        "menuEntityTaxes": [
+            {
+                "id": "916798316",
+                "entityType": "CATALOGUE",
+                "entityId": "795166111",
+                "taxGroupIds": [
+                    1
+                ]
+            },
+            {
+                "id": "916794988",
+                "entityType": "CATALOGUE",
+                "entityId": "795164139",
+                "taxGroupIds": [
+                    1
+                ]
+            }
+        ],
+        "mapVariantIdToCatalogueId": {
+            "1060849618": "795166111",
+            "1063071947": "795164139",
+            "1063071948": "795164139",
+            "1063071949": "795164139"
         },
-        "subCategory": {
-            "tempReferenceId": "",
-            "subCategoryId": "86676933"
+        "tagIdentifiers": {
+            "non-veg": {
+                "value": [
+                    "prawns",
+                    "oyster",
+                    "chkn",
+                    "murgh",
+                    "chicken",
+                    "mutton",
+                    "fish",
+                    "beef",
+                    "buffalo",
+                    "crab",
+                    "murg",
+                    "prawn",
+                    "tuna",
+                    "gosht",
+                    "pork",
+                    "meat",
+                    "pepperoni",
+                    "murga",
+                    "irachi",
+                    "non veg",
+                    "kozi",
+                    "rawas",
+                    "ribs",
+                    "tangdi",
+                    "tangri",
+                    "bangda",
+                    "lobster",
+                    "wings",
+                    "lamb",
+                    "catla",
+                    "surmai",
+                    "jhinga",
+                    "leg",
+                    "salmon",
+                    "pomfret",
+                    "kallumakkaya",
+                    "mussels",
+                    "shrimp",
+                    "basa",
+                    "rohu",
+                    "wagyu",
+                    "pigeon",
+                    "brain",
+                    "kaleji",
+                    "turkey",
+                    "veal",
+                    "venison",
+                    "deer",
+                    "bacon",
+                    "kozhi",
+                    "ham",
+                    "sausage",
+                    "salami",
+                    "tenderloin",
+                    "tenderlion",
+                    "boneless",
+                    "non-veg",
+                    "buff",
+                    "naati koli",
+                    "seafood",
+                    "fillet",
+                    "liver",
+                    "chorizo",
+                    "natukodi",
+                    "natu",
+                    "natukoti",
+                    "calamari",
+                    "bangada",
+                    "machh",
+                    "maach",
+                    "john dory",
+                    "paya",
+                    "nethilly",
+                    "nethili",
+                    "naatukozhi",
+                    "proscuitto",
+                    "prosciutto",
+                    "rabbit",
+                    "quail",
+                    "teetar",
+                    "bhetki",
+                    "kharoda",
+                    "kharode",
+                    "kharora",
+                    "vaankozhi",
+                    "scallop",
+                    "duck",
+                    "goose",
+                    "snapper",
+                    "bombayduck",
+                    "yellowtail",
+                    "mombar",
+                    "bommidala",
+                    "bommidaala",
+                    "bommidaila",
+                    "endu chepala",
+                    "meen",
+                    "katapona",
+                    "kata pona",
+                    "kodi kura",
+                    "macher",
+                    "maacher",
+                    "machher",
+                    "pabda",
+                    "pheasant",
+                    "anchovy",
+                    "katla",
+                    "machli",
+                    "boti",
+                    "patanga",
+                    "frog",
+                    "chepala",
+                    "squid",
+                    "raan",
+                    "hilsa",
+                    "mangsho",
+                    "ghosht",
+                    "gurda",
+                    "chingri",
+                    "eel",
+                    "carp",
+                    "telapia",
+                    "karimeen",
+                    "catfish",
+                    "kukkad",
+                    "macchi",
+                    "ilish",
+                    "insect",
+                    "gushtaba",
+                    "makanek",
+                    "kouju",
+                    "vanjaram",
+                    "soujouk",
+                    "mackerel",
+                    "modso",
+                    "haleem",
+                    "erachi",
+                    "nalli",
+                    "nihari",
+                    "natholi",
+                    "bangude",
+                    "tilapia",
+                    "bombil",
+                    "macchli",
+                    "chemmeen",
+                    "chemeen",
+                    "bheja",
+                    "tangadi",
+                    "parshe",
+                    "mandeli",
+                    "winglet",
+                    "boothai",
+                    "sardine",
+                    "nattu",
+                    "kibbeh",
+                    "rogan",
+                    "buthai",
+                    "breast",
+                    "chooza",
+                    "kekada",
+                    "khedaka",
+                    "alfam",
+                    "angus",
+                    "kobe",
+                    "meatball",
+                    "thigh",
+                    "rooster",
+                    "yakitori",
+                    "kolambi",
+                    "broiler",
+                    "ladyfish",
+                    "shellfish",
+                    "cuttlefish",
+                    "crayfish",
+                    "swordfish",
+                    "belanji",
+                    "bhangda",
+                    "bhuthai",
+                    "chonak",
+                    "croaker",
+                    "goat",
+                    "bakra",
+                    "bakri",
+                    "hilsha",
+                    "kaada",
+                    "koddai",
+                    "kokkar",
+                    "koduvai",
+                    "koonthal",
+                    "mackarel",
+                    "octopus",
+                    "shark",
+                    "spleen",
+                    "chembally",
+                    "royyala",
+                    "royyalla",
+                    "barrah",
+                    "batair",
+                    "beckty",
+                    "betki",
+                    "bhekti",
+                    "chest",
+                    "camel",
+                    "carnivorous",
+                    "chingudi",
+                    "chital",
+                    "dajaj",
+                    "eeral",
+                    "sheep",
+                    "shoulder",
+                    "illish",
+                    "jheenga",
+                    "kalamari",
+                    "kamju",
+                    "kanava",
+                    "koramenu",
+                    "laham",
+                    "lahem",
+                    "parindey",
+                    "marwai",
+                    "rajugari",
+                    "samundari",
+                    "seabass",
+                    "herring",
+                    "seabream",
+                    "shimpli",
+                    "sirloin",
+                    "sirlion",
+                    "tangari",
+                    "tisrya",
+                    "unagi",
+                    "poultry",
+                    "cattle",
+                    "animal",
+                    "bird"
+                ]
+            },
+            "egg": {
+                "value": [
+                    "egg",
+                    "eggs",
+                    "omelette",
+                    "omlette",
+                    "omelete",
+                    "omlete",
+                    "omelatte",
+                    "omlatte",
+                    "omelate",
+                    "omlate"
+                ]
+            }
         },
-        "catalogue": {
-            "tempReferenceId": "",
-            "catalogueId": ""
-        }
-    },
-    "menuVersion": "1780771267997"
+        "orderedGroupSlugs": [
+            "dietary",
+            "category",
+            "beverage",
+            "miscellaneous",
+            "single-serve-meal-type",
+            "festivals",
+            "life-extension-selection",
+            "speciality",
+            "info",
+            "liquor-category",
+            "gourmet",
+            "business-type",
+            "logistics",
+            "grocery-info",
+            "smart-filter",
+            "celebration-cake-flavors",
+            "gst_classification",
+            "z-healthy",
+            "allergens",
+            "quick-value-meals",
+            "commission-category",
+            "legally-sensitive",
+            "single-serve-cuisines",
+            "nutrition-and-indicators",
+            "cake",
+            "internal",
+            "healthy-category",
+            "gst-classification",
+            "mealtime",
+            "life-extension-tags",
+            "cart-recommendation",
+            "bestsellers",
+            "spice-level",
+            "life-style",
+            "dietary-restrictions",
+            "status",
+            "grocery-category",
+            "restrictions",
+            "promotional"
+        ],
+        "metadata": {
+            "entityTypeMeta": {
+                "MEDIA": {
+                    "entityIdMeta": {
+                        "388075973": {
+                            "metadataValues": {
+                                "stock_image": {
+                                    "metaKey": "stock_image",
+                                    "metaValue": "{\"restricted_source\":true}"
+                                }
+                            }
+                        },
+                        "388075974": {
+                            "metadataValues": {
+                                "stock_image": {
+                                    "metaKey": "stock_image",
+                                    "metaValue": "{\"zomato\":true}"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "serviceRole": "DELIVERY_TAKEAWAY",
+        "preparationTimes": [
+            {
+                "slug": "0to5min",
+                "displayString": "0 - 5 mins"
+            },
+            {
+                "slug": "5to10min",
+                "displayString": "5 - 10 mins"
+            },
+            {
+                "slug": "10to15min",
+                "displayString": "10 - 15 mins"
+            },
+            {
+                "slug": "15to20min",
+                "displayString": "15 - 20 mins"
+            },
+            {
+                "slug": "20to25min",
+                "displayString": "20 - 25 mins"
+            },
+            {
+                "slug": "25to30min",
+                "displayString": "25 - 30 mins"
+            },
+            {
+                "slug": "30to35min",
+                "displayString": "30 - 35 mins"
+            },
+            {
+                "slug": "35to40min",
+                "displayString": "35 - 40 mins"
+            },
+            {
+                "slug": "40to45min",
+                "displayString": "40 - 45 mins"
+            },
+            {
+                "slug": "45to50min",
+                "displayString": "45 - 50 mins"
+            },
+            {
+                "slug": "50to55min",
+                "displayString": "50 - 55 mins"
+            },
+            {
+                "slug": "55to60min",
+                "displayString": "55 - 60 mins"
+            },
+            {
+                "slug": "60+min",
+                "displayString": "60+ mins"
+            }
+        ],
+        "portionSizes": [
+            {
+                "slug": "kg",
+                "displayString": "kg"
+            },
+            {
+                "slug": "litre",
+                "displayString": "litre"
+            },
+            {
+                "slug": "ml",
+                "displayString": "ml"
+            },
+            {
+                "slug": "ounces",
+                "displayString": "ounces"
+            },
+            {
+                "slug": "scoop",
+                "displayString": "scoop"
+            },
+            {
+                "slug": "grams",
+                "displayString": "grams"
+            },
+            {
+                "slug": "inches",
+                "displayString": "inches"
+            },
+            {
+                "slug": "pounds",
+                "displayString": "pounds"
+            },
+            {
+                "slug": "serves",
+                "displayString": "serves"
+            },
+            {
+                "slug": "slice",
+                "displayString": "slices"
+            },
+            {
+                "slug": "cms",
+                "displayString": "cms"
+            },
+            {
+                "slug": "piece",
+                "displayString": "piece"
+            }
+        ],
+        "deliveryMenuExists": true,
+        "menuExists": true,
+        "servingInfos": [
+            {
+                "slug": "1person",
+                "displayString": "1 person"
+            },
+            {
+                "slug": "1to2people",
+                "displayString": "1 - 2 people"
+            },
+            {
+                "slug": "2to3people",
+                "displayString": "2 - 3 people"
+            },
+            {
+                "slug": "3to4people",
+                "displayString": "3 - 4 people"
+            },
+            {
+                "slug": "4to5people",
+                "displayString": "4 - 5 people"
+            },
+            {
+                "slug": "5to6people",
+                "displayString": "5 - 6 people"
+            },
+            {
+                "slug": "6to7people",
+                "displayString": "6 - 7 people"
+            },
+            {
+                "slug": "7to8people",
+                "displayString": "7 - 8 people"
+            },
+            {
+                "slug": "8to9people",
+                "displayString": "8 - 9 people"
+            },
+            {
+                "slug": "9to10people",
+                "displayString": "9 - 10 people"
+            },
+            {
+                "slug": "10+people",
+                "displayString": "10+ people"
+            }
+        ],
+        "templateWrappers": [
+            {
+                "entityType": "CATALOGUE",
+                "templateType": "TT_CAKE",
+                "template": {
+                    "portionSizes": [
+                        {
+                            "slug": "grams",
+                            "displayString": "grams"
+                        },
+                        {
+                            "slug": "kg",
+                            "displayString": "kg"
+                        }
+                    ],
+                    "itemDetails": {
+                        "modifierGroupKinds": [
+                            "cake-message-placement",
+                            "cake-accessories"
+                        ],
+                        "properties": [
+                            {
+                                "catalogueProperty": {
+                                    "name": "Choose your preference",
+                                    "propertyValues": [
+                                        {
+                                            "value": "With Egg",
+                                            "tagSlugs": [
+                                                "egg"
+                                            ],
+                                            "kind": "cake-dietary-with-egg"
+                                        },
+                                        {
+                                            "value": "Eggless",
+                                            "tagSlugs": [
+                                                "veg"
+                                            ],
+                                            "kind": "cake-dietary-eggless"
+                                        }
+                                    ],
+                                    "kind": "cake-dietary-preference"
+                                },
+                                "cataloguePropertyValues": [
+                                    {
+                                        "value": "With Egg",
+                                        "tagSlugs": [
+                                            "egg"
+                                        ],
+                                        "kind": "cake-dietary-with-egg"
+                                    },
+                                    {
+                                        "value": "Eggless",
+                                        "tagSlugs": [
+                                            "veg"
+                                        ],
+                                        "kind": "cake-dietary-eggless"
+                                    }
+                                ]
+                            },
+                            {
+                                "catalogueProperty": {
+                                    "name": "Pick size of cake",
+                                    "propertyValues": [
+                                        {
+                                            "value": "500",
+                                            "unit": "grams"
+                                        }
+                                    ],
+                                    "kind": "cake-size"
+                                },
+                                "cataloguePropertyValues": [
+                                    {
+                                        "value": "500",
+                                        "unit": "grams"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            },
+            {
+                "entityType": "CATALOGUE",
+                "templateType": "TT_FSSAI",
+                "template": {
+                    "media": [
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 1,
+                            "usageType": "FULL_BACK_COVER",
+                            "title": "Full back cover",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 2,
+                            "usageType": "LICENSE_NUMBER",
+                            "title": "FSSAI license number",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 3,
+                            "usageType": "NUTRITIONAL_INFO",
+                            "title": "Nutritional info + additives",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 4,
+                            "usageType": "INGREDIENTS",
+                            "title": "List of ingredients",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 5,
+                            "usageType": "MANUFACTURER",
+                            "title": "Details of manufacturer & importer/seller",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 6,
+                            "usageType": "COUNTRY_ORIGIN",
+                            "title": "Country of origin",
+                            "isMandatory": true,
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 7,
+                            "usageType": "INSTRUCTIONS",
+                            "title": "Instructions to use the product",
+                            "guideline": []
+                        },
+                        {
+                            "mediaType": "PHOTO",
+                            "order": 8,
+                            "usageType": "QUANTITY",
+                            "title": "Net quantity",
+                            "guideline": []
+                        }
+                    ]
+                }
+            },
+            {
+                "entityType": "CATALOGUE",
+                "templateType": "TT_MITHAI_BOX",
+                "template": {
+                    "itemDetails": {
+                        "modifierGroupKinds": [
+                            "box-variable-pieces-per-row",
+                            "box-fixed-weight",
+                            "box-fixed-pieces-per-row",
+                            "box-fixed-piece",
+                            "box-preassorted-row-mg"
+                        ]
+                    }
+                }
+            }
+        ],
+        "tagTemplates": [
+            {
+                "tagSlug": "mrp-item",
+                "templateType": "TT_FSSAI"
+            }
+        ],
+        "meatTypes": [
+            {
+                "slug": "chicken",
+                "displayString": "Chicken",
+                "group": "popular"
+            },
+            {
+                "slug": "fish",
+                "displayString": "Fish",
+                "group": "popular"
+            },
+            {
+                "slug": "mutton",
+                "displayString": "Mutton",
+                "group": "popular"
+            },
+            {
+                "slug": "goat",
+                "displayString": "Goat",
+                "group": "popular"
+            },
+            {
+                "slug": "lamb",
+                "displayString": "Lamb",
+                "group": "popular"
+            },
+            {
+                "slug": "pork",
+                "displayString": "Pork",
+                "group": "popular"
+            },
+            {
+                "slug": "egg",
+                "displayString": "Egg",
+                "group": "popular"
+            },
+            {
+                "slug": "turkey",
+                "displayString": "Turkey",
+                "group": "popular"
+            },
+            {
+                "slug": "beef",
+                "displayString": "Beef",
+                "group": "popular"
+            },
+            {
+                "slug": "buffalo",
+                "displayString": "Buffalo",
+                "group": "popular"
+            },
+            {
+                "slug": "bull",
+                "displayString": "Bull",
+                "group": "popular"
+            },
+            {
+                "slug": "crab",
+                "displayString": "Crab",
+                "group": "popular"
+            },
+            {
+                "slug": "prawn",
+                "displayString": "Prawn",
+                "group": "popular"
+            },
+            {
+                "slug": "shrimp",
+                "displayString": "Shrimp",
+                "group": "popular"
+            },
+            {
+                "slug": "shellfish",
+                "displayString": "Shellfish",
+                "group": "popular"
+            },
+            {
+                "slug": "squid",
+                "displayString": "Squid",
+                "group": "popular"
+            },
+            {
+                "slug": "lobster",
+                "displayString": "Lobster",
+                "group": "popular"
+            },
+            {
+                "slug": "duck",
+                "displayString": "Duck",
+                "group": "unique"
+            },
+            {
+                "slug": "camel",
+                "displayString": "Camel",
+                "group": "unique"
+            },
+            {
+                "slug": "deer",
+                "displayString": "Deer",
+                "group": "unique"
+            },
+            {
+                "slug": "frog",
+                "displayString": "Frog",
+                "group": "unique"
+            },
+            {
+                "slug": "goose",
+                "displayString": "Goose",
+                "group": "unique"
+            },
+            {
+                "slug": "insect",
+                "displayString": "Insect",
+                "group": "unique"
+            },
+            {
+                "slug": "octopus",
+                "displayString": "Octopus",
+                "group": "unique"
+            },
+            {
+                "slug": "pigeon",
+                "displayString": "Pigeon",
+                "group": "unique"
+            },
+            {
+                "slug": "quail",
+                "displayString": "Quail",
+                "group": "unique"
+            },
+            {
+                "slug": "rabbit",
+                "displayString": "Rabbit",
+                "group": "unique"
+            },
+            {
+                "slug": "shark",
+                "displayString": "Shark",
+                "group": "unique"
+            },
+            {
+                "slug": "veal",
+                "displayString": "Veal",
+                "group": "unique"
+            },
+            {
+                "slug": "venison",
+                "displayString": "Venison",
+                "group": "unique"
+            }
+        ],
+        "moderationData": [],
+        "unitInfo": {
+            "proteinUnits": [
+                {
+                    "slug": "grams",
+                    "displayString": "grams"
+                },
+                {
+                    "slug": "mg",
+                    "displayString": "mg"
+                }
+            ],
+            "carbohydrateUnits": [
+                {
+                    "slug": "grams",
+                    "displayString": "grams"
+                },
+                {
+                    "slug": "mg",
+                    "displayString": "mg"
+                }
+            ],
+            "fatUnits": [
+                {
+                    "slug": "grams",
+                    "displayString": "grams"
+                },
+                {
+                    "slug": "mg",
+                    "displayString": "mg"
+                }
+            ],
+            "fiberUnits": [
+                {
+                    "slug": "grams",
+                    "displayString": "grams"
+                },
+                {
+                    "slug": "mg",
+                    "displayString": "mg"
+                }
+            ],
+            "servingSizeUnits": [
+                {
+                    "slug": "grams",
+                    "displayString": "grams"
+                },
+                {
+                    "slug": "ml",
+                    "displayString": "ml"
+                }
+            ]
+        },
+        "allergenTypes": [
+            {
+                "slug": "gluten",
+                "displayString": "Gluten"
+            },
+            {
+                "slug": "peanut",
+                "displayString": "Peanut"
+            },
+            {
+                "slug": "soybeans",
+                "displayString": "Soybeans"
+            },
+            {
+                "slug": "crustacean",
+                "displayString": "Crustacean"
+            },
+            {
+                "slug": "egg",
+                "displayString": "Egg"
+            },
+            {
+                "slug": "fish",
+                "displayString": "Fish"
+            },
+            {
+                "slug": "tree-nuts",
+                "displayString": "Tree nuts"
+            },
+            {
+                "slug": "milk",
+                "displayString": "Milk"
+            },
+            {
+                "slug": "sulphite",
+                "displayString": "Sulphite"
+            }
+        ],
+        "offers": []
+    }
 }

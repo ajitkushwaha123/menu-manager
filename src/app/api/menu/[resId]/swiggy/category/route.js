@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { SwiggyClient } from "@/lib/api/swiggy-client";
 import { validateRequiredFields } from "@/lib/payload/helper";
 
-const CATEGORY_POST_REQUIRED_FIELDS = ["name", "type"];
+const CATEGORY_POST_REQUIRED_FIELDS = ["name"];
 const CATEGORY_DELETE_REQUIRED_FIELDS = ["category_ids"];
-const CATEGORY_UPDATE_REQUIRED_FIELDS = ["name", "type", "category_id"];
+const CATEGORY_UPDATE_REQUIRED_FIELDS = ["name", "id"];
 
 export async function POST(request, { params }) {
     try {
@@ -15,8 +15,8 @@ export async function POST(request, { params }) {
 
         const payload = {
             "name": body.name,
-            "type": body.type,
-            "insightMappings": body.insightMappings,
+            "type": "Cat",
+            "insightMappings": body.insightMappings || null,
         }
 
         const response = await SwiggyClient({
@@ -95,11 +95,12 @@ export async function PUT(request, { params }) {
 
         const payload = {
             "category_name": body.name,
-            "type": body.type,
+            "type": "Cat",
         }
 
+        console.log("payload", payload)
         const response = await SwiggyClient({
-            endpoint: `/api/cms/menu-revision/v1/${resId}/category/${body?.category_id}`,
+            endpoint: `/api/cms/menu-revision/v1/${resId}/category/${body?.id}`,
             method: "PUT",
             data: payload,
         });

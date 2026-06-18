@@ -10,6 +10,7 @@ export default function ImageUpload({
     status = "idle",
     className,
     height = 208,
+    onClick,
 }) {
     const fileInputRef = useRef(null);
     const [dragging, setDragging] = useState(false);
@@ -59,7 +60,13 @@ export default function ImageUpload({
                 }}
                 onDragLeave={() => setDragging(false)}
                 onDrop={handleDrop}
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => {
+                    if (onClick) {
+                        onClick();
+                    } else {
+                        fileInputRef.current?.click();
+                    }
+                }}
                 className={cn(
                     "group relative flex cursor-pointer items-center justify-center overflow-hidden rounded-xl border-2 border-dashed transition-all",
                     dragging ? "border-primary bg-primary/5" : borderColor

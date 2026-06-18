@@ -1,31 +1,42 @@
 import merge from "lodash.merge";
-export const variantGroups = (variants = [], foodType = "VEG") =>
+
+export const variantGroups = (
+    variants = [],
+    basePrice = 0,
+    is_veg = "VEG"
+) =>
     variants
         .filter(
             (group) =>
-                group?.name &&
+                group?.property_name &&
                 Array.isArray(group.options) &&
                 group.options.length > 0
         )
         .map((group) => ({
             variant_group: {
-                name: group.name,
+                name: group.property_name,
             },
 
             variants_vo: group.options.map(
                 (
                     {
-                        name,
+                        option_name,
                         price = 0,
-                        foodType: variantFoodType = foodType,
+                        is_veg: variantFoodType = is_veg,
                         inStock = true,
                         default: isDefault = false,
                     },
                     index
                 ) => ({
                     variant: {
-                        name,
-                        price,
+                        name: option_name,
+
+                        // Swiggy expects variant price as delta from item price
+                        price: Math.max(
+                            0,
+                            Number(price) - Number(basePrice)
+                        ),
+
                         in_stock: inStock ? 1 : 0,
                         is_veg: variantFoodType,
                         default: isDefault || index === 0 ? 1 : 0,
@@ -38,11 +49,11 @@ export function buildItemPayload({
     name,
     description = "",
     price = 0,
-    foodType = "VEG",
-    imageUrl = "",
-    imageId = null,
-    mainCategoryId,
-    mainCategoryName,
+    is_veg = "VEG",
+    image_url = "",
+    image_id = null,
+    categoryId,
+    categoryName,
     subCategoryId,
     subCategoryName,
     packingCharges = 0,
@@ -75,12 +86,12 @@ export function buildItemPayload({
             item: {
                 id: null,
                 name,
-                is_veg: foodType,
+                is_veg,
                 description,
                 price,
                 packing_charges: packingCharges,
-                image_url: imageUrl,
-                image_id: imageId,
+                image_url,
+                image_id,
 
                 gst_details: {
                     sgst: "[SUBTOTAL]*0.025",
@@ -98,16 +109,20 @@ export function buildItemPayload({
             order,
             enabled: enabled ? 1 : 0,
 
-            main_category_id: mainCategoryId,
+            main_category_id: categoryId,
             sub_category_id: subCategoryId,
 
             eligible_for_long_distance: 0,
 
-            variant_groups_vo: variantGroups(variants, foodType),
+            variant_groups_vo: variantGroups(
+                variants,
+                price,
+                is_veg
+            ),
 
             addon_groups_vo: addonGroups,
 
-            main_category_name: mainCategoryName,
+            main_category_name: categoryName,
             sub_category_name: subCategoryName,
         },
     };
@@ -133,7 +148,8 @@ export function buildItemUpdatePayload(source, updates = {}) {
             spice_level:
                 source.item?.catalog_attributes?.spice_level ?? null,
 
-            cutlery: source.item?.catalog_attributes?.cutlery ?? null,
+            cutlery:
+                source.item?.catalog_attributes?.cutlery ?? null,
 
             sweet_level:
                 source.item?.catalog_attributes?.sweet_level ?? null,
@@ -209,9 +225,6 @@ export function buildItemUpdatePayload(source, updates = {}) {
         },
     };
 
-    /**
-     * Fields inside item_vo.item
-     */
     const itemFields = [
         "name",
         "is_veg",
@@ -219,18 +232,16 @@ export function buildItemUpdatePayload(source, updates = {}) {
         "price",
         "packing_charges",
         "image_url",
-        "image_id"
+        "image_id",
     ];
 
     for (const field of itemFields) {
         if (updates[field] !== undefined) {
-            allowedUpdates.item_vo.item[field] = updates[field];
+            allowedUpdates.item_vo.item[field] =
+                updates[field];
         }
     }
 
-    /**
-     * Fields directly inside item_vo
-     */
     const rootFields = [
         "in_stock",
         "enabled",
@@ -255,7 +266,8 @@ export function buildItemUpdatePayload(source, updates = {}) {
 
     for (const field of rootFields) {
         if (updates[field] !== undefined) {
-            allowedUpdates.item_vo[field] = updates[field];
+            allowedUpdates.item_vo[field] =
+                updates[field];
         }
     }
 
@@ -264,17 +276,21 @@ export function buildItemUpdatePayload(source, updates = {}) {
             updates.variant_groups_vo;
     }
 
-    if (
-        Array.isArray(updates.variants)
-    ) {
+    if (Array.isArray(updates.variants)) {
+        const itemPrice =
+            updates.price ??
+            source.item?.price ??
+            0;
+
         allowedUpdates.item_vo.variant_groups_vo =
             variantGroups(
                 updates.variants,
-                updates.foodType ??
+                itemPrice,
                 updates.is_veg ??
                 source.item?.is_veg
             );
     }
+
     if (updates.addon_groups_vo !== undefined) {
         allowedUpdates.item_vo.addon_groups_vo =
             updates.addon_groups_vo;

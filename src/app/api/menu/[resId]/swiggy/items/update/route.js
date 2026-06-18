@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import { SwiggyClient } from "@/lib/api/swiggy-client";
-import { validateRequiredFields } from "@/lib/payload/helper";
 import { buildItemUpdatePayload } from "@/lib/payload/swiggy/add-items";
-
-const REQUIRED_FIELDS = [
-    "item_id"
-];
 
 export async function POST(request, { params }) {
     try {
         const { resId } = await params;
         const body = await request.json();
 
-        validateRequiredFields(body, REQUIRED_FIELDS);
+        const itemId = body.item_id || body.id;
+        const updates = body.updated_items || body;
+
+        if (!itemId) {
+            throw new Error("item_id or id is required");
+        }
+
         const menuResp = await SwiggyClient({
             endpoint: `/api/cms/menu-revision/v1/restaurant-menu-wrapper/${resId}`,
             method: "GET",
@@ -24,9 +25,9 @@ export async function POST(request, { params }) {
         });
 
         const items = menuResp?.data?.data?.menu?.items_vo || []
-        const item = items.find((item) => item?.item?.uniqueId === body.item_id)
+        const item = items.find((item) => item?.item?.uniqueId === itemId)
 
-        const updatePayload = buildItemUpdatePayload(item, body.updated_items || {});
+        const updatePayload = buildItemUpdatePayload(item, updates);
 
         const updateResp = await SwiggyClient({
             endpoint: `/api/cms/menu-revision/v1/item/${resId}`,

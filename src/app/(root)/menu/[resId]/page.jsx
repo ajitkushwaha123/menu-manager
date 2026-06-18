@@ -1,132 +1,61 @@
 "use client";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useParams } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { useMenu } from "@/store/hooks/useMenu";
-import CatalogueList from "@/components/features/menu/category-list";
-import CategorySidebar from "@/components/features/menu/category-sidebar";
+import { openImageSidebar } from "@/store/slices/menuSlice";
+import ImageSidebar from "@/components/features/menu/image-sidebar";
+import CategorySidebar from "@/components/features/menu/sidebar/CategorySidebar";
+import Loading from "@/components/global/general/states/Loading";
+import Error from "@/components/global/general/states/Error";
+import MenuItemList from "@/components/features/menu/menu-item-list";
 
 export default function Page() {
-    const { resId } = useParams();
+  const { resId } = useParams();
+  const dispatch = useDispatch();
 
-    const { fetchMenu, menu, loading, error, activeSubCategory } = useMenu(resId);
+  const {
+    fetchMenu,
+    loading,
+    error,
+    activeSubCategoryData,
+    updateCatalogue,
+    deleteItem,
+    addItem,
+  } = useMenu(resId);
 
-    useEffect(() => {
-        if (resId) {
-            fetchMenu();
-        }
-    }, [resId, fetchMenu]);
-
-    const catalogues = useMemo(() => {
-        if (
-            !menu?.catalogueWrappers ||
-            !activeSubCategory
-        ) {
-            return [];
-        }
-
-        const subCategory =
-            menu.categoryWrappers
-                ?.flatMap(
-                    (category) =>
-                        category.subCategoryWrappers || []
-                )
-                ?.find(
-                    (sub) =>
-                        sub.subCategory.subCategoryId ===
-                        activeSubCategory ||
-                        sub.subCategory.tempReferenceId ===
-                        activeSubCategory
-                );
-
-        const catalogueIds =
-            subCategory?.subCategoryEntities
-                ?.filter(
-                    (entity) =>
-                        entity.entityType?.toLowerCase() ===
-                        "catalogue"
-                )
-                ?.map((entity) => entity.entityId) || [];
-
-        return menu.catalogueWrappers
-            .filter((wrapper) =>
-                catalogueIds.includes(
-                    wrapper.catalogue.catalogueId
-                )
-            )
-            .map((wrapper) => ({
-                id: wrapper.catalogue.catalogueId,
-                resId: wrapper.catalogue.resId,
-                name: wrapper.catalogue.name,
-                description:
-                    wrapper.catalogue.description,
-                imageUrl:
-                    wrapper.catalogue.thumbUrl,
-                thumbUrl:
-                    wrapper.catalogue.thumbUrl,
-                imageHash:
-                    wrapper.catalogue.imageHash,
-                isVisible:
-                    wrapper.catalogue.isVisible,
-                inStock:
-                    wrapper.catalogue.inStock,
-                onHoldStatus:
-                    wrapper.catalogue.onHoldStatus,
-                turnOnTime:
-                    wrapper.catalogue.turnOnTime,
-                tags:
-                    wrapper.catalogueTags || [],
-                price:
-                    wrapper.variantWrappers?.[0]
-                        ?.variantPrices?.[0]?.price ||
-                    0,
-                raw: wrapper,
-            }));
-    }, [menu, activeSubCategory]);
-
-    if (loading) {
-        return (
-            <div className="flex h-screen items-center justify-center">
-                Loading...
-            </div>
-        );
+  useEffect(() => {
+    if (resId) {
+      fetchMenu();
     }
+  }, [resId, fetchMenu]);
 
-    if (error) {
-        return (
-            <div className="flex h-screen items-center justify-center">
-                {error}
-            </div>
-        );
-    }
-
+  if (loading) {
     return (
-        <div className="flex h-screen">
-            <CategorySidebar
-                resId={resId}
-            />
-            <div className="flex-1">
-                {activeSubCategory ? (
-                    <>
-                        {/* <pre className="text-xs overflow-auto"> */}
-                        {/* {JSON.stringify(menu ?? {}, null, 2)} */}
-                        {/* </pre><CatalogueList items={catalogues} resId={resId} /> */}
-                    </>
-
-                ) : (
-                    <div className="flex h-full items-center justify-center">
-                        <div className="text-center">
-                            <h3 className="text-lg font-medium">
-                                Select a Subcategory
-                            </h3>
-
-                            <p className="text-sm text-muted-foreground">
-                                Choose a subcategory from the left sidebar
-                                to view menu items.
-                            </p>
-                        </div>
-                    </div>
-                )}
-            </div>
-        </div>
+      <Loading message="" />
     );
+  }
+
+  if (error) {
+    return (
+      <Error error={error} retry={fetchMenu} />
+    );
+  }
+  return (
+    <div className="flex h-screen bg-slate-50/50 relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/5 via-background to-background" />
+      <div className="relative z-10 flex h-full w-full">
+        <CategorySidebar resId={resId} />
+
+        <MenuItemList
+          activeSubCategoryData={activeSubCategoryData}
+          addItem={addItem}
+          updateCatalogue={updateCatalogue}
+          deleteItem={deleteItem}
+        />
+
+        <ImageSidebar resId={resId} />
+      </div>
+    </div>
+  );
 }

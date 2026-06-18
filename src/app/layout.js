@@ -14,11 +14,14 @@ export const metadata = {
     "Manage agreements, clients, and workflows efficiently with MagicScale Manager.",
 };
 
+import { Toaster } from "@/components/ui/sonner";
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={poppins.variable}>
       <body className="font-sans antialiased bg-background text-foreground">
         <AppShell>{children}</AppShell>
+        <Toaster richColors position="top-right" />
       </body>
     </html>
   );
