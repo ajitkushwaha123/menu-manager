@@ -22,7 +22,9 @@ const AppShell = ({ children }) => {
             <AppSidebar variant="inset" />
 
             <SidebarInset className="flex flex-1 flex-col min-w-0">
-              <SiteHeader />
+              <React.Suspense fallback={null}>
+                <SiteHeader />
+              </React.Suspense>
               <main className="flex-1 min-w-0">{children}</main>
             </SidebarInset>
           </div>

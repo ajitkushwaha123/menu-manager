@@ -1,9 +1,13 @@
+import path from "path";
+import axios from "axios";
 import { randomUUID } from "crypto";
 import { NextResponse } from "next/server";
-import axios from "axios";
+import { fileTypeFromBuffer } from "file-type";
 
-function generateImagePath(imageName) {
-    const sanitizedName = imageName
+function generateImagePath(imageName, detectedExt = "jpg") {
+    const fileName = path.parse(imageName).name;
+
+    const sanitizedName = `${fileName}.${detectedExt}`
         .replace(/[<>:"/\\|?*]/g, "")
         .trim();
 
@@ -23,6 +27,16 @@ export async function POST(request) {
                 {
                     success: false,
                     message: "image or imageUrl is required",
+                },
+                { status: 400 }
+            );
+        }
+
+        if (!itemName) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "itemName is required",
                 },
                 { status: 400 }
             );
@@ -53,20 +67,16 @@ export async function POST(request) {
             }
         }
 
-        if (!itemName) {
-            return NextResponse.json(
-                {
-                    success: false,
-                    message: "itemName is required",
-                },
-                { status: 400 }
+        const detectedType =
+            await fileTypeFromBuffer(
+                imageBuffer
             );
-        }
 
         const imagePath = generateImagePath(
-            imageNameStr
+            imageNameStr,
+            detectedType?.ext || "jpg"
         );
-
+        console.log(imageNameStr, imageType, imagePath, detectedType)
         /**
          * STEP 1
          * Get presigned upload URL

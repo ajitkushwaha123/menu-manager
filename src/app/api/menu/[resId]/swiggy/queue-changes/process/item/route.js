@@ -107,6 +107,11 @@ export async function POST(req, { params }) {
         }
 
         console.log("data", data)
+        console.log("data item", data?.updatePayload?.item_vo?.item);
+        console.log("data variants", data?.updatePayload?.item_vo?.variant_groups_vo);
+        console.log("data variants var", data?.updatePayload?.item_vo?.variant_groups_vo[0]?.variants_vo);
+
+
         const items = sync.updated_menu?.items || [];
 
         const itemEntry = items.find((itm) => itm.id === payload.id);

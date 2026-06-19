@@ -3,6 +3,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Breadcrumbs } from "./breadcrumb";
 import MenuSaveButton from "./features/menu/menu-save-button";
 import MenuImportButtons from "./features/menu/menu-import-buttons";
+import AiPriceAdjustButton from "./features/menu/ai-price-adjust-button";
 import { useParams, useSearchParams, usePathname } from "next/navigation";
 
 export function SiteHeader() {
@@ -20,6 +21,7 @@ export function SiteHeader() {
         />
         <Breadcrumbs />
         <div className="ml-auto flex items-center gap-2">
+          <AiPriceAdjustButton />
           <MenuImportButtons resId={resId} currentPlatform={platform} />
           <MenuSaveButton resId={resId} />
         </div>

@@ -91,14 +91,13 @@ const isItemValid = (item) => {
     );
 };
 
-const upsertUpdatedMenuEntry = (entries, entry) => {
+const upsertUpdatedMenuEntry = (entries, entry, fullItem = null) => {
     if (!Array.isArray(entries)) return;
 
-    // Validation for items (which have price or description properties)
-    if ('price' in entry || 'description' in entry || 'is_veg' in entry) {
-        // If it's a delete action, we should always allow it
-        if (entry.action !== 'delete' && !isItemValid(entry)) {
-            // Remove from queue if it becomes invalid
+    const itemToValidate = fullItem || entry;
+    if ('price' in itemToValidate || 'description' in itemToValidate || 'is_veg' in itemToValidate) {
+
+        if (entry.action !== 'delete' && !isItemValid(itemToValidate)) {
             const idx = entries.findIndex(i => i.id === entry.id);
             if (idx >= 0) entries.splice(idx, 1);
             return;
@@ -307,7 +306,7 @@ const menuSlice = createSlice({
                             subCategoryName: s.name,
                             ...updates,
                             action: existingEntry?.action || "update",
-                        });
+                        }, item);
                     }
                 });
             });

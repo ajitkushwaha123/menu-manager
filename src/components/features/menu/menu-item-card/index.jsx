@@ -11,7 +11,6 @@ export default function MenuItemRow({
 
     const updateField = (field, value) => {
         onChange?.({
-            ...item,
             [field]: value,
         });
     };
