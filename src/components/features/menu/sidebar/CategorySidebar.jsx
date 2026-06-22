@@ -8,6 +8,7 @@ import CategoryCard from "./CategoryCard";
 
 export default function CategorySidebar({
     resId,
+    platform,
 }) {
     const {
         menu,
@@ -24,7 +25,7 @@ export default function CategorySidebar({
         setActiveSubCategory,
         queueAll,
         queueCategory
-    } = useMenu(resId);
+    } = useMenu(resId, platform);
 
     const [search, setSearch] = useState("");
     const [expandedCategory, setExpandedCategory] = useState(null);
@@ -46,13 +47,15 @@ export default function CategorySidebar({
             name: cat.name,
             temp_id: cat.temp_id,
             raw: cat,
-            subcategories: (cat.sub_category || []).map((sub) => ({
-                id: sub.id,
-                name: sub.name,
-                temp_id: sub.temp_id,
-                raw: sub,
-            })),
-        }));
+            subcategories: (cat.sub_category || [])
+                .map((sub) => ({
+                    id: sub.id,
+                    name: sub.name,
+                    temp_id: sub.temp_id,
+                    raw: sub,
+                }))
+                .sort((a, b) => a.name?.localeCompare(b.name || "")),
+        })).sort((a, b) => a.name?.localeCompare(b.name || ""));
     }, [menu]);
 
     useEffect(() => {

@@ -84,9 +84,9 @@ const createEmptyUpdatedMenu = () => ({
 
 const isItemValid = (item) => {
     return Boolean(
-        item.name?.trim() && 
-        item.price !== undefined && item.price !== null && item.price !== "" && 
-        item.description?.trim() && 
+        item.name?.trim() &&
+        item.price !== undefined && item.price !== null && item.price !== "" &&
+        item.description?.trim() &&
         item.is_veg && item.is_veg !== "UNKNOWN"
     );
 };
@@ -115,7 +115,14 @@ const upsertUpdatedMenuEntry = (entries, entry, fullItem = null) => {
         return;
     }
 
-    entries.push(entryWithStatus);
+    if (entry.action === "create") {
+        entries.push({
+            ...(fullItem || {}),
+            ...entryWithStatus
+        });
+    } else {
+        entries.push(entryWithStatus);
+    }
 };
 
 const initialState = {
@@ -128,6 +135,7 @@ const initialState = {
     activeSubCategory: null,
     activeImageSearchItem: null,
     isImageSidebarOpen: false,
+    copiedItem: null,
 };
 
 const menuSlice = createSlice({
@@ -141,6 +149,10 @@ const menuSlice = createSlice({
             state.error = null;
             state.activeCategory = null;
             state.activeSubCategory = null;
+            state.copiedItem = null;
+        },
+        setCopiedItem: (state, action) => {
+            state.copiedItem = action.payload;
         },
         setActiveCategory: (state, action) => {
             state.activeCategory = action.payload;
@@ -267,23 +279,36 @@ const menuSlice = createSlice({
                     if (!sub.items) sub.items = [];
 
                     const newItem = {
-                        id: generateId(),
                         name: "New Item",
                         description: "",
                         price: 0,
                         is_veg: "UNKNOWN",
-                        variants: [],
                         ...item,
+                        id: generateId(),
+                        isNew: true,
+                        variants: (item?.variants || []).map(v => ({
+                            ...v,
+                            id: generateId(),
+                            options: (v.options || []).map(o => ({
+                                ...o,
+                                id: generateId()
+                            }))
+                        }))
                     };
+
+                    delete newItem.categoryId;
+                    delete newItem.categoryName;
+                    delete newItem.subCategoryId;
+                    delete newItem.subCategoryName;
 
                     sub.items.push(newItem);
                     upsertUpdatedMenuEntry(state.updated_menu.items, {
+                        ...newItem,
                         id: newItem.id,
                         categoryId: c.id,
                         categoryName: c.name,
                         subCategoryId,
                         subCategoryName: sub.name,
-                        ...newItem,
                         action: "create",
                     });
                 }
@@ -299,13 +324,13 @@ const menuSlice = createSlice({
 
                         const existingEntry = state.updated_menu.items.find((entry) => entry.id === itemId);
                         upsertUpdatedMenuEntry(state.updated_menu.items, {
+                            ...updates,
                             id: itemId,
                             categoryId: c.id,
                             categoryName: c.name,
                             subCategoryId: s.id,
                             subCategoryName: s.name,
-                            ...updates,
-                            action: existingEntry?.action || "update",
+                            action: existingEntry?.action || (item.isNew ? "create" : "update"),
                         }, item);
                     }
                 });
@@ -497,7 +522,8 @@ export const {
     closeImageSidebar,
     markMenuUpdatesDone,
     queueAll,
-    queueCategory
+    queueCategory,
+    setCopiedItem
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

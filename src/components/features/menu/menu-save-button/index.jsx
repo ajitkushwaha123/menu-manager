@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select"
 
 const MenuSaveButton = ({ resId, currentPlatform = "swiggy" }) => {
-    const { updated_menu, saveMenu } = useMenu(resId)
+    const { updated_menu, saveMenu } = useMenu(resId, currentPlatform)
     const [open, setOpen] = useState(false)
     const [targetPlatform, setTargetPlatform] = useState(currentPlatform)
     const [targetResId, setTargetResId] = useState(resId || "")

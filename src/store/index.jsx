@@ -6,3 +6,9 @@ export const store = configureStore({
     menu: menuReducer
   },
 });
+
+export const createMenuStore = () => configureStore({
+  reducer: {
+    menu: menuReducer
+  },
+});

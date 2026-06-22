@@ -141,6 +141,11 @@ const data = {
       url: "/menu",
       icon: Frame,
     },
+    {
+      name: "Menu Compare",
+      url: "/menu/compare",
+      icon: Frame,
+    },
   ],
 };
 

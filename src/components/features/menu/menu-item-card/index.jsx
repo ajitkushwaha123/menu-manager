@@ -1,13 +1,30 @@
-import { Trash2, Plus, ImageIcon, ChevronDown, ChevronUp, X, Check } from "lucide-react";
-import { useState } from "react";
+import { Trash2, Plus, ImageIcon, ChevronDown, ChevronUp, X, Check, Copy } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function MenuItemRow({
     item,
     onChange,
     onDelete,
     onImageChange,
+    onCopy,
 }) {
     const [variantsExpanded, setVariantsExpanded] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) {
+                if (window.getSelection().toString()) return;
+            }
+
+            if (isHovered && (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+                e.preventDefault();
+                onCopy?.(item);
+            }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [isHovered, item, onCopy]);
 
     const updateField = (field, value) => {
         onChange?.({
@@ -70,7 +87,11 @@ export default function MenuItemRow({
     };
 
     return (
-        <div className="group bg-white border rounded-xl p-3 hover:border-orange-300 transition-all mb-3">
+        <div 
+            className="group bg-white border rounded-xl p-3 hover:border-orange-300 transition-all mb-3"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
             <div className="flex gap-3">
                 <div className="relative shrink-0">
                     <img
@@ -142,11 +163,19 @@ export default function MenuItemRow({
                         />
                     </div>
                 </div>
-                {/* DELETE */}
-                <div className="shrink-0 flex items-center">
+                {/* ACTIONS */}
+                <div className="shrink-0 flex items-center gap-1">
+                    <button
+                        onClick={() => onCopy?.(item)}
+                        className="h-8 w-8 rounded-lg flex items-center justify-center text-blue-500 hover:bg-blue-50"
+                        title="Copy Item"
+                    >
+                        <Copy size={16} />
+                    </button>
                     <button
                         onClick={() => onDelete?.(item)}
                         className="h-8 w-8 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-50"
+                        title="Delete Item"
                     >
                         <Trash2 size={16} />
                     </button>

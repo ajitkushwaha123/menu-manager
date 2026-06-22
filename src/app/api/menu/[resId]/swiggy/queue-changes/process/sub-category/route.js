@@ -75,79 +75,126 @@ export async function POST(req, { params }) {
             console.error(`Swiggy API Error in sub-category sync for action ${action}:`, err.message);
         }
 
-        // Re-fetch sync to avoid race conditions with concurrent worker jobs
-        const freshSync = await MenuSync.findById(syncId);
-        if (!freshSync) throw new Error("Sync not found during save");
-
-        const freshSubCategories = freshSync.updated_menu?.sub_categories || [];
-        const freshSubCategory = freshSubCategories.find((sub) => sub.id === payload.id);
-
         if (action === "create") {
             const swiggySubCategoryId = data?.data?.id || data?.response?.data?.data?.id;
             const tempId = payload?.id;
 
             if (!swiggySubCategoryId || !tempId || apiError) {
-                if (freshSubCategory) {
-                    freshSubCategory.status = "failed";
-                    freshSubCategory.error = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "SubCategory sync failed";
-                }
-            } else {
-                if (freshSubCategory) {
-                    freshSubCategory.id = swiggySubCategoryId;
-                    freshSubCategory.status = "completed";
-                    freshSubCategory.error = null;
-                }
-
-                const items = freshSync.updated_menu?.items || [];
-                for (const item of items) {
-                    if (item.subCategoryId === tempId) {
-                        item.subCategoryId = swiggySubCategoryId;
+                const errorMsg = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "SubCategory sync failed";
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.sub_categories.$.status": "failed",
+                            "updated_menu.sub_categories.$.error": errorMsg
+                        }
                     }
-                }
+                );
+            } else {
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.sub_categories.$.id": swiggySubCategoryId,
+                            "updated_menu.sub_categories.$.status": "completed",
+                            "updated_menu.sub_categories.$.error": null
+                        }
+                    }
+                );
+
+                await MenuSync.updateMany(
+                    { _id: syncId },
+                    {
+                        $set: {
+                            "updated_menu.items.$[elem].subCategoryId": swiggySubCategoryId
+                        }
+                    },
+                    {
+                        arrayFilters: [{ "elem.subCategoryId": tempId }]
+                    }
+                );
             }
         }
 
         if (action === "update") {
-            if (freshSubCategory) {
-                if (apiError || data?.response?.data?.statusCode === -1 || data?.response?.data?.statusMessage === "FAILURE") {
-                    freshSubCategory.status = "failed";
-                    freshSubCategory.error = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "SubCategory update failed";
-                } else {
-                    freshSubCategory.status = "completed";
-                    freshSubCategory.error = null;
-                }
+            if (apiError || data?.response?.data?.statusCode === -1 || data?.response?.data?.statusMessage === "FAILURE") {
+                const errorMsg = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "SubCategory update failed";
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.sub_categories.$.status": "failed",
+                            "updated_menu.sub_categories.$.error": errorMsg
+                        }
+                    }
+                );
+            } else {
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.sub_categories.$.status": "completed",
+                            "updated_menu.sub_categories.$.error": null
+                        }
+                    }
+                );
             }
         }
 
         if (action === "delete") {
             if (apiError) {
                 if (payload.sub_category_ids) {
-                    payload.sub_category_ids.forEach(id => {
-                        const sub = freshSubCategories.find(s => s.id === id);
-                        if (sub) {
-                            sub.status = "failed";
-                            sub.error = apiError.message || "Delete failed";
+                    await MenuSync.updateMany(
+                        { _id: syncId },
+                        {
+                            $set: {
+                                "updated_menu.sub_categories.$[elem].status": "failed",
+                                "updated_menu.sub_categories.$[elem].error": apiError.message || "Delete failed"
+                            }
+                        },
+                        {
+                            arrayFilters: [{ "elem.id": { $in: payload.sub_category_ids } }]
                         }
-                    });
-                } else if (freshSubCategory) {
-                    freshSubCategory.status = "failed";
-                    freshSubCategory.error = apiError.message || "Delete failed";
+                    );
+                } else if (payload.id) {
+                    await MenuSync.updateOne(
+                        { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                        {
+                            $set: {
+                                "updated_menu.sub_categories.$.status": "failed",
+                                "updated_menu.sub_categories.$.error": apiError.message || "Delete failed"
+                            }
+                        }
+                    );
                 }
             } else {
                 if (payload.sub_category_ids) {
-                    payload.sub_category_ids.forEach(id => {
-                        const sub = freshSubCategories.find(s => s.id === id);
-                        if (sub) sub.status = "completed";
-                    });
-                } else if (freshSubCategory) {
-                    freshSubCategory.status = "completed";
+                    await MenuSync.updateMany(
+                        { _id: syncId },
+                        {
+                            $set: {
+                                "updated_menu.sub_categories.$[elem].status": "completed"
+                            }
+                        },
+                        {
+                            arrayFilters: [{ "elem.id": { $in: payload.sub_category_ids } }]
+                        }
+                    );
+                } else if (payload.id) {
+                    await MenuSync.updateOne(
+                        { _id: syncId, "updated_menu.sub_categories.id": payload.id },
+                        {
+                            $set: {
+                                "updated_menu.sub_categories.$.status": "completed"
+                            }
+                        }
+                    );
                 }
             }
         }
 
-        freshSync.markModified("updated_menu");
-        await freshSync.save();
-
+        const freshSync = await MenuSync.findById(syncId);
+        const freshSubCategories = freshSync?.updated_menu?.sub_categories || [];
         const pendingSubCategories = freshSubCategories.filter((sub) => sub.status !== "completed" && sub.status !== "failed");
 
         if (
@@ -157,11 +204,18 @@ export async function POST(req, { params }) {
                 `All subcategories completed for sync ${syncId}`
             );
 
-            await swiggyProcessorJob({
-                resId,
-                syncId,
-                type: "item_sync",
-            });
+            const updated = await MenuSync.findOneAndUpdate(
+                { _id: syncId, "updated_menu.subcategories_queued": { $ne: true } },
+                { $set: { "updated_menu.subcategories_queued": true } }
+            );
+
+            if (updated) {
+                await swiggyProcessorJob({
+                    resId,
+                    syncId,
+                    type: "item_sync",
+                });
+            }
         }
 
         return NextResponse.json(

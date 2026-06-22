@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -14,14 +12,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Wand2, Loader2 } from "lucide-react";
+import { Sparkles, Loader2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
 import { fetchMenu } from "@/store/slices/menuSlice";
 import { useSearchParams, usePathname } from "next/navigation";
 
-export default function AiPriceAdjustButton({ explicitResId, explicitPlatform }) {
+export default function AiDescriptionButton({ explicitResId, explicitPlatform }) {
   const params = useParams();
   const resId = explicitResId || params.resId;
   const searchParams = useSearchParams();
@@ -29,7 +27,6 @@ export default function AiPriceAdjustButton({ explicitResId, explicitPlatform })
   const platform = explicitPlatform || searchParams?.get("platform") || (pathname?.includes("/zomato") ? "zomato" : "swiggy");
   
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -37,23 +34,19 @@ export default function AiPriceAdjustButton({ explicitResId, explicitPlatform })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value.trim()) return;
 
     setLoading(true);
     try {
-      const { data } = await axios.post(`/api/menu/${resId}/ai/price`, {
-        value: value.trim(),
-      });
+      const { data } = await axios.post(`/api/menu/${resId}/ai/description`);
 
       if (data.success) {
-        toast.success(`Successfully updated ${data.updated_items} items.`);
+        toast.success(`Successfully generated descriptions for ${data.updated_items} items.`);
         setOpen(false);
-        setValue("");
-        // Refetch menu to reflect updated prices
+        // Refetch menu to reflect updated descriptions
         dispatch(fetchMenu({ resId, platform }));
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || "Failed to adjust prices");
+      toast.error(error.response?.data?.message || "Failed to generate descriptions");
     } finally {
       setLoading(false);
     }
@@ -62,43 +55,27 @@ export default function AiPriceAdjustButton({ explicitResId, explicitPlatform })
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2 bg-purple-50 hover:bg-purple-100 text-purple-600 border-purple-200">
-          <Wand2 className="h-4 w-4" />
-          Adjust Prices
+        <Button variant="outline" size="sm" className="gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border-blue-200">
+          <Sparkles className="h-4 w-4" />
+          AI Descriptions
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
-            <DialogTitle>AI Price Adjustment</DialogTitle>
+            <DialogTitle>Generate AI Descriptions</DialogTitle>
             <DialogDescription>
-              Adjust all menu item prices by a percentage or absolute value.
-              <br />
-              <span className="font-semibold text-muted-foreground">Examples:</span> 10%, -10%, 20, -20
+              This will automatically generate AI descriptions for all menu items that don't have one or need improvement.
+              This process might take a few moments.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="adjustmentValue" className="text-right">
-                Value
-              </Label>
-              <Input
-                id="adjustmentValue"
-                placeholder="e.g. 10%"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-                className="col-span-3"
-                disabled={loading}
-              />
-            </div>
-          </div>
-          <DialogFooter>
+          <DialogFooter className="mt-6">
             <Button type="button" variant="ghost" onClick={() => setOpen(false)} disabled={loading}>
               Cancel
             </Button>
-            <Button type="submit" disabled={loading || !value.trim()}>
+            <Button type="submit" disabled={loading}>
               {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-              Apply
+              Generate
             </Button>
           </DialogFooter>
         </form>

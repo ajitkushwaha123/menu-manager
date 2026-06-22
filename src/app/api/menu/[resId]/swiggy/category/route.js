@@ -25,6 +25,8 @@ export async function POST(request, { params }) {
             data: payload,
         });
 
+        console.log("category response", response?.data?.data)
+
         return NextResponse.json({
             success: true,
             response,

@@ -27,7 +27,7 @@
       "electron/**/*",
       ".next/standalone/**/*",
       "bull-server/**/*",
-      "src/lib/bullmq/worker/**/*",
+      "src/lib/bullmq/**/*",
       ".env"
     ],
     "win": {

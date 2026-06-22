@@ -21,11 +21,11 @@ import {
     queueCategory
 } from "@/store/slices/menuSlice";
 
-export const useMenu = (resId) => {
+export const useMenu = (resId, explicitPlatform) => {
     const dispatch = useDispatch();
     const pathname = usePathname();
     const searchParams = useSearchParams();
-    const platform = searchParams?.get('platform') || (pathname?.includes('/zomato') ? 'zomato' : 'swiggy');
+    const platform = explicitPlatform || searchParams?.get('platform') || (pathname?.includes('/zomato') ? 'zomato' : 'swiggy');
 
     const { menu, restaurantName, updated_menu, loading, error, activeCategory, activeSubCategory } = useSelector((state) => state.menu);
 

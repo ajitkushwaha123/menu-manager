@@ -55,7 +55,8 @@ export async function POST(req, { params }) {
                     if (
                         item?.id != null &&
                         typeof item?.name === "string" &&
-                        item.name.trim()
+                        item.name.trim() &&
+                        (!item.description || item.description.trim() === "")
                     ) {
                         itemsToProcess.push({
                             item_id: String(item.id),

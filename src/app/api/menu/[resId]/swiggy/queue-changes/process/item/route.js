@@ -131,68 +131,122 @@ export async function POST(req, { params }) {
             console.log(swiggyItemId, tempId);
 
             if (!swiggyItemId || !tempId || apiError) {
-                console.error(`Item create failed. tempId: ${tempId}, Error: ${apiError?.message || 'Missing ID'}`);
-                if (itemEntry) {
-                    itemEntry.status = "failed";
-                    itemEntry.error = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "Item sync failed";
-                }
-            } else if (itemEntry) {
-                itemEntry.id = swiggyItemId;
-                itemEntry.status = "completed";
-                itemEntry.error = null;
+                const errorMsg = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "Item sync failed";
+                console.error(`Item create failed. tempId: ${tempId}, Error: ${errorMsg}`);
+                
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.items.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.items.$.status": "failed",
+                            "updated_menu.items.$.error": errorMsg
+                        }
+                    }
+                );
+            } else {
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.items.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.items.$.id": swiggyItemId,
+                            "updated_menu.items.$.status": "completed",
+                            "updated_menu.items.$.error": null
+                        }
+                    }
+                );
                 console.log(`Updated item ${tempId} -> ${swiggyItemId}`);
             }
         }
 
         if (action === "update") {
-            if (itemEntry) {
-                if (apiError || data?.response?.data?.statusCode === -1 || data?.response?.data?.statusMessage === "FAILURE") {
-                    itemEntry.status = "failed";
-                    itemEntry.error = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "Item update failed";
-                } else {
-                    itemEntry.status = "completed";
-                    itemEntry.error = null;
-                }
+            if (apiError || data?.response?.data?.statusCode === -1 || data?.response?.data?.statusMessage === "FAILURE") {
+                const errorMsg = data?.response?.data?.statusMessage || data?.response?.data?.data?.error?.rejectMessage || apiError?.message || "Item update failed";
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.items.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.items.$.status": "failed",
+                            "updated_menu.items.$.error": errorMsg
+                        }
+                    }
+                );
+            } else {
+                await MenuSync.updateOne(
+                    { _id: syncId, "updated_menu.items.id": payload.id },
+                    {
+                        $set: {
+                            "updated_menu.items.$.status": "completed",
+                            "updated_menu.items.$.error": null
+                        }
+                    }
+                );
             }
         }
 
         if (action === "delete") {
             if (apiError) {
                 if (payload.item_ids) {
-                    payload.item_ids.forEach(id => {
-                        const itm = items.find(i => i.id === id);
-                        if (itm) {
-                            itm.status = "failed";
-                            itm.error = apiError.message || "Delete failed";
+                    await MenuSync.updateMany(
+                        { _id: syncId },
+                        {
+                            $set: {
+                                "updated_menu.items.$[elem].status": "failed",
+                                "updated_menu.items.$[elem].error": apiError.message || "Delete failed"
+                            }
+                        },
+                        {
+                            arrayFilters: [{ "elem.id": { $in: payload.item_ids } }]
                         }
-                    });
-                } else if (itemEntry) {
-                    itemEntry.status = "failed";
-                    itemEntry.error = apiError.message || "Delete failed";
+                    );
+                } else if (payload.id) {
+                    await MenuSync.updateOne(
+                        { _id: syncId, "updated_menu.items.id": payload.id },
+                        {
+                            $set: {
+                                "updated_menu.items.$.status": "failed",
+                                "updated_menu.items.$.error": apiError.message || "Delete failed"
+                            }
+                        }
+                    );
                 }
             } else {
                 if (payload.item_ids) {
-                    payload.item_ids.forEach(id => {
-                        const itm = items.find(i => i.id === id);
-                        if (itm) itm.status = "completed";
-                    });
-                } else if (itemEntry) {
-                    itemEntry.status = "completed";
+                    await MenuSync.updateMany(
+                        { _id: syncId },
+                        {
+                            $set: {
+                                "updated_menu.items.$[elem].status": "completed"
+                            }
+                        },
+                        {
+                            arrayFilters: [{ "elem.id": { $in: payload.item_ids } }]
+                        }
+                    );
+                } else if (payload.id) {
+                    await MenuSync.updateOne(
+                        { _id: syncId, "updated_menu.items.id": payload.id },
+                        {
+                            $set: {
+                                "updated_menu.items.$.status": "completed"
+                            }
+                        }
+                    );
                 }
             }
         }
 
-        sync.markModified("updated_menu");
-        await sync.save();
-
-        const pendingItems = items.filter((itm) => itm.status !== "completed" && itm.status !== "failed");
+        const freshSync = await MenuSync.findById(syncId);
+        const freshItems = freshSync?.updated_menu?.items || [];
+        const pendingItems = freshItems.filter((itm) => itm.status !== "completed" && itm.status !== "failed");
 
         if (pendingItems.length === 0) {
             console.log(`All items completed for sync ${syncId}`);
 
             // At this point, the entire MenuSync is actually completed!
-            sync.status = "completed";
-            await sync.save();
+            await MenuSync.updateOne(
+                { _id: syncId },
+                { $set: { status: "completed" } }
+            );
         }
 
         return NextResponse.json(
