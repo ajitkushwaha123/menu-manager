@@ -56,6 +56,26 @@ export const fetchMenu = createAsyncThunk(
     }
 );
 
+export const saveMenuToDB = createAsyncThunk(
+    "menu/saveMenuToDB",
+    async ({ resId, platform, menu }, { rejectWithValue }) => {
+        try {
+            const { data } = await axios.post(
+                `/api/menu/${resId}?platform=${platform}`,
+                { menu }
+            );
+
+            return data?.data;
+        } catch (error) {
+            return rejectWithValue(
+                error.response?.data?.message ||
+                error.message ||
+                "Failed to save menu to database"
+            );
+        }
+    }
+);
+
 export const saveMenu = createAsyncThunk(
     "menu/saveMenu",
     async ({ resId, platform, payload }, { rejectWithValue }) => {
@@ -498,6 +518,17 @@ const menuSlice = createSlice({
                 state.updated_menu = createEmptyUpdatedMenu();
             })
             .addCase(saveMenu.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload;
+            })
+            .addCase(saveMenuToDB.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(saveMenuToDB.fulfilled, (state) => {
+                state.loading = false;
+            })
+            .addCase(saveMenuToDB.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });

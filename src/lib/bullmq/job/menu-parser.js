@@ -7,6 +7,11 @@ export const menuParserJob = async ({
     percentage
 }) => {
     try {
+        console.log("resId", resId);
+        console.log("pageNumber", pageNumber);
+        console.log("pdfUrl", pdfUrl);
+        console.log("percentage", percentage);
+
         const job = await menuParserQueue.add(
             "menu-page-extraction",
             {

@@ -2,6 +2,7 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Breadcrumbs } from "./breadcrumb";
 import MenuSaveButton from "./features/menu/menu-save-button";
+import MenuSaveDBButton from "./features/menu/menu-save-db-button";
 import MenuImportButtons from "./features/menu/menu-import-buttons";
 import AiPriceAdjustButton from "./features/menu/ai-price-adjust-button";
 import AiDescriptionButton from "./features/menu/ai-description-button";
@@ -25,7 +26,8 @@ export function SiteHeader() {
           <AiDescriptionButton />
           <AiPriceAdjustButton />
           <MenuImportButtons resId={resId} currentPlatform={platform} />
-          <MenuSaveButton resId={resId} />
+          <MenuSaveDBButton resId={resId} currentPlatform={platform} />
+          <MenuSaveButton resId={resId} currentPlatform={platform} />
         </div>
       </div>
     </header>

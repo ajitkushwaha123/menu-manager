@@ -73,43 +73,67 @@ export async function POST(req, { params }) {
                 (subCategory) => {
                     subCategory.items?.forEach(
                         (item) => {
+                            let isUpdated = false;
                             const currentPrice =
                                 Number(item?.price);
 
                             if (
-                                isNaN(currentPrice)
+                                !isNaN(currentPrice) && item?.price !== undefined && item?.price !== null && item?.price !== ""
                             ) {
-                                return;
+                                let newPrice;
+
+                                if (
+                                    isPercentage
+                                ) {
+                                    newPrice =
+                                        currentPrice +
+                                        (currentPrice *
+                                            numericValue) /
+                                        100;
+                                } else {
+                                    newPrice =
+                                        currentPrice +
+                                        numericValue;
+                                }
+
+                                newPrice = Math.max(
+                                    0,
+                                    newPrice
+                                );
+
+                                item.price =
+                                    Math.round(
+                                        newPrice /
+                                        ROUND_TO
+                                    ) * ROUND_TO;
+                                    
+                                isUpdated = true;
                             }
 
-                            let newPrice;
-
-                            if (
-                                isPercentage
-                            ) {
-                                newPrice =
-                                    currentPrice +
-                                    (currentPrice *
-                                        numericValue) /
-                                    100;
-                            } else {
-                                newPrice =
-                                    currentPrice +
-                                    numericValue;
+                            if (item?.variants && Array.isArray(item.variants)) {
+                                item.variants.forEach((group) => {
+                                    if (group?.options && Array.isArray(group.options)) {
+                                        group.options.forEach((opt) => {
+                                            const currentOptPrice = Number(opt?.price);
+                                            if (!isNaN(currentOptPrice) && opt?.price !== undefined && opt?.price !== null && opt?.price !== "") {
+                                                let newOptPrice;
+                                                if (isPercentage) {
+                                                    newOptPrice = currentOptPrice + (currentOptPrice * numericValue) / 100;
+                                                } else {
+                                                    newOptPrice = currentOptPrice + numericValue;
+                                                }
+                                                newOptPrice = Math.max(0, newOptPrice);
+                                                opt.price = Math.round(newOptPrice / ROUND_TO) * ROUND_TO;
+                                                isUpdated = true;
+                                            }
+                                        });
+                                    }
+                                });
                             }
 
-                            newPrice = Math.max(
-                                0,
-                                newPrice
-                            );
-
-                            item.price =
-                                Math.round(
-                                    newPrice /
-                                    ROUND_TO
-                                ) * ROUND_TO;
-
-                            updatedCount++;
+                            if (isUpdated) {
+                                updatedCount++;
+                            }
                         }
                     );
                 }

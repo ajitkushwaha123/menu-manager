@@ -3,8 +3,10 @@ import dbConnect from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 import { generateMenuDescriptions } from "@/services/gemini/generate-description";
 
-const BATCH_SIZE = 20;
-const CONCURRENCY = 3;
+const BATCH_SIZE = 40;
+const CONCURRENCY = 1;
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function chunk(array, size) {
     const chunks = [];
@@ -48,8 +50,9 @@ export async function POST(req, { params }) {
         }
 
         const itemsToProcess = [];
+        const categories = Array.isArray(menu?.menu) ? menu.menu : menu?.menu?.categories || [];
 
-        menu.menu?.forEach((category) => {
+        categories.forEach((category) => {
             category.sub_category?.forEach((subCategory) => {
                 subCategory.items?.forEach((item) => {
                     if (
@@ -99,6 +102,10 @@ export async function POST(req, { params }) {
             );
 
             results.push(...responses.flat());
+
+            if (i + CONCURRENCY < batches.length) {
+                await delay(2000); // 2 second delay between batches to prevent 429 Too Many Requests
+            }
         }
 
         const descriptionMap = new Map(
@@ -116,7 +123,7 @@ export async function POST(req, { params }) {
 
         let updatedCount = 0;
 
-        menu.menu?.forEach((category) => {
+        categories.forEach((category) => {
             category.sub_category?.forEach((subCategory) => {
                 subCategory.items?.forEach((item) => {
                     const description =

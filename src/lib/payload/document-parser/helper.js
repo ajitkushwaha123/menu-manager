@@ -1,7 +1,7 @@
 import { PDFDocument } from "pdf-lib";
 
 export async function splitPdf(buffer) {
-    const pdf = await PDFDocument.load(buffer);
+    const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
 
     const pages = [];
 

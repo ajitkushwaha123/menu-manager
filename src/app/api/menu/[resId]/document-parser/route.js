@@ -11,10 +11,11 @@ export async function POST(request, { params }) {
         await dbConnect();
 
         const { resId } = await params;
+        console.log("resIdddd", resId)
 
         const formData = await request.formData();
         const file = formData.get("file");
-
+        console.log("file", file)
         if (!file) {
             return NextResponse.json(
                 {
@@ -50,6 +51,7 @@ export async function POST(request, { params }) {
             fileName: file.name,
         });
 
+        console.log("pdfUpload", pdfUpload)
         const pages = await splitPdf(pdfBuffer);
 
         const uploadedPages = [];

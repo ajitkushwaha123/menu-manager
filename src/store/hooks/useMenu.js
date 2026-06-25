@@ -18,7 +18,8 @@ import {
     addItem,
     deleteItem,
     queueAll,
-    queueCategory
+    queueCategory,
+    saveMenuToDB
 } from "@/store/slices/menuSlice";
 
 export const useMenu = (resId, explicitPlatform) => {
@@ -47,6 +48,15 @@ export const useMenu = (resId, explicitPlatform) => {
             payload
         })).unwrap();
     }, [dispatch, resId, platform])
+
+    const saveToDB = useCallback(async () => {
+        if (!resId || !Array.isArray(menu)) return;
+        return dispatch(saveMenuToDB({
+            resId,
+            platform,
+            menu: { categories: menu }
+        })).unwrap();
+    }, [dispatch, resId, platform, menu]);
 
     const createCategory = useCallback(
         (name) => {
@@ -225,6 +235,7 @@ export const useMenu = (resId, explicitPlatform) => {
 
         addImage: uploadImage,
         saveMenu: updateMenu,
+        saveToDB,
         
         queueAll: queueEntireMenu,
         queueCategory: queueSpecificCategory

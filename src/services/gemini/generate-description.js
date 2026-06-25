@@ -47,8 +47,7 @@ export async function generateMenuDescriptions(items = []) {
                     item &&
                     item.item_id != null &&
                     item.name
-            )
-            .slice(0, 20);
+            );
 
         const prompt = `
 You are an expert restaurant menu copywriter.
