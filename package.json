@@ -101,7 +101,7 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.1",
     "baseline-browser-mapping": "^2.10.38",
     "concurrently": "^10.0.3",
     "electron": "^42.4.1",
