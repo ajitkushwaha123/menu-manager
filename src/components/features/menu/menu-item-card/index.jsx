@@ -1,5 +1,6 @@
 import { Trash2, Plus, ImageIcon, ChevronDown, ChevronUp, X, Check, Copy } from "lucide-react";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 
 export default function MenuItemRow({
     item,
@@ -10,6 +11,7 @@ export default function MenuItemRow({
 }) {
     const [variantsExpanded, setVariantsExpanded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
+    const [isDraggingOver, setIsDraggingOver] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (e) => {
@@ -93,7 +95,26 @@ export default function MenuItemRow({
             onMouseLeave={() => setIsHovered(false)}
         >
             <div className="flex gap-3">
-                <div className="relative shrink-0">
+                <div
+                    className={`relative shrink-0 rounded-lg overflow-hidden border transition-all duration-200 ${
+                        isDraggingOver ? "ring-2 ring-primary scale-105" : ""
+                    }`}
+                    onDragOver={(e) => {
+                        e.preventDefault();
+                        setIsDraggingOver(true);
+                    }}
+                    onDragLeave={() => setIsDraggingOver(false)}
+                    onDrop={(e) => {
+                        e.preventDefault();
+                        setIsDraggingOver(false);
+                        const url = e.dataTransfer.getData("text/uri-list") || e.dataTransfer.getData("text/plain");
+                        if (url) {
+                            updateField("image_url", url);
+                            updateField("image", { url });
+                            toast.success("Image updated from drag & drop!");
+                        }
+                    }}
+                >
                     <img
                         src={
                             item?.image_url ||
@@ -101,11 +122,11 @@ export default function MenuItemRow({
                             "https://placehold.co/200x200?text=Food"
                         }
                         alt={item?.name || "Item"}
-                        className="w-16 h-16 rounded-lg object-cover border"
+                        className="w-16 h-16 object-cover"
                     />
                     <button
                         onClick={() => onImageChange?.(item)}
-                        className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-[2px] rounded-lg"
+                        className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity backdrop-blur-[2px] rounded-lg"
                         title="Change Image"
                     >
                         <ImageIcon className="text-white" size={24} />

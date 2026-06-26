@@ -62,7 +62,7 @@ export async function GET(req, { params }) {
                         options: (group.variants_vo || []).map((variantVo) => ({
                             option_name: variantVo.variant?.name || "",
                             option_id: variantVo.variant?.id || "",
-                            price: variantVo.variant?.price || 0,
+                            price: (variantVo.variant?.price || 0) + (itemData.item.price || 0),
                             is_veg: variantVo.variant?.is_veg || "",
                         })),
                     })),

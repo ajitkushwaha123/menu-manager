@@ -1,106 +1,167 @@
-import { VertexAI } from "@google-cloud/vertexai";
+import { safeParseModelJson } from "@/lib/json-parser";
+import {
+    BedrockRuntimeClient,
+    ConverseCommand,
+} from "@aws-sdk/client-bedrock-runtime";
 
-const vertexAI = new VertexAI({
-    project: "advance-maker-499006-k7",
-    location: "us-central1",
+const bedrockClient = new BedrockRuntimeClient({
+    region: "us-east-1",
 });
-
-const generativeModel = vertexAI.getGenerativeModel({
-    model: "gemini-2.5-flash-lite",
-});
-
-const descriptionSchema = {
-    type: "OBJECT",
-    properties: {
-        items: {
-            type: "ARRAY",
-            items: {
-                type: "OBJECT",
-                properties: {
-                    item_id: {
-                        type: "STRING",
-                    },
-                    name: {
-                        type: "STRING",
-                    },
-                    description: {
-                        type: "STRING",
-                    },
-                },
-                required: ["item_id", "name", "description"],
-            },
-        },
-    },
-    required: ["items"],
-};
 
 export async function generateMenuDescriptions(items = []) {
-    console.log("items", items)
-    try {
-        if (!Array.isArray(items) || items.length === 0) {
-            return [];
-        }
+    if (!Array.isArray(items) || items.length === 0) {
+        return [];
+    }
 
-        const cleanedItems = items
-            .filter(
-                (item) =>
-                    item &&
-                    item.item_id != null &&
-                    item.name
-            );
+    const cleanedItems = items.filter(
+        (item) =>
+            item &&
+            item.item_id != null &&
+            item.name
+    );
 
-        const prompt = `
+    if (!cleanedItems.length) {
+        return [];
+    }
+
+    const systemPrompt = `
 You are an expert restaurant menu copywriter.
-Generate a concise menu description for every item.
-RULES:
-1. Preserve item_id EXACTLY as provided.
-2. Preserve name EXACTLY as provided.
-3. Description should be one short sentence.
-4. Length: 8 - 20 words.
-5. Sound natural and appetizing.
-6. Do NOT mention price.
-7. Do NOT invent variants.
-8. Do NOT skip any item.
-9. Return valid JSON only.
-10. Match the schema exactly.
 
-    Items:
+Return ONLY valid JSON.
 
-${cleanedItems
-                .map(
-                    (item) =>
-                        `item_id: ${item.item_id}, name: ${item.name}`
-                )
-                .join("\n")
-            }
+Never wrap JSON inside markdown.
+Never explain anything.
+Never skip items.
 `;
 
-        const response = await generativeModel.generateContent({
-            contents: [
+    const prompt = `
+Generate a short menu description for EVERY item.
+
+==========================
+RULES
+==========================
+
+1. Preserve item_id EXACTLY.
+2. Preserve name EXACTLY.
+3. Description must be one sentence.
+4. 8-20 words.
+5. Natural and appetizing.
+6. Never mention price.
+7. Never invent variants.
+8. Never skip any item.
+
+Return ONLY minified JSON.
+
+Expected format:
+
+{
+  "items":[
+    {
+      "item_id":"123",
+      "name":"Paneer Butter Masala",
+      "description":"Creamy tomato gravy cooked with soft paneer cubes."
+    }
+  ]
+}
+
+Items:
+
+${cleanedItems
+            .map(
+                (item) =>
+                    `item_id: ${item.item_id}, name: ${item.name}`
+            )
+            .join("\n")}
+`;
+
+    try {
+        const command = new ConverseCommand({
+            modelId: "amazon.nova-lite-v1:0",
+
+            system: [
                 {
-                    role: "user",
-                    parts: [{ text: prompt }],
+                    text: systemPrompt,
                 },
             ],
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: descriptionSchema,
-                temperature: 0.3,
+
+            messages: [
+                {
+                    role: "user",
+                    content: [
+                        {
+                            text: prompt,
+                        },
+                    ],
+                },
+            ],
+
+            inferenceConfig: {
+                maxTokens: 10000,
+                temperature: 0.2,
             },
         });
 
-        const output =
-            response.response.candidates?.[0]?.content?.parts?.[0]?.text;
+        const response = await bedrockClient.send(command);
 
-        if (!output) {
-            throw new Error("Empty response from Gemini");
+        const content =
+            response?.output?.message?.content || [];
+
+        console.log(
+            "Nova Description Response:",
+            JSON.stringify(content, null, 2)
+        );
+
+        /*
+        -----------------------------
+        Extract text
+        -----------------------------
+        */
+
+        const rawText = content
+            .map((block) => block.text || "")
+            .join("\n");
+
+        /*
+        -----------------------------
+        Normal JSON parse
+        -----------------------------
+        */
+
+        try {
+            const parsed = JSON.parse(rawText);
+
+            if (Array.isArray(parsed?.items)) {
+                return parsed.items;
+            }
+        } catch { }
+
+        /*
+        -----------------------------
+        Recover truncated JSON
+        -----------------------------
+        */
+
+        const recovered =
+            safeParseModelJson(rawText);
+
+        if (
+            recovered &&
+            Array.isArray(recovered.items)
+        ) {
+            console.log(
+                "Recovered description JSON."
+            );
+
+            return recovered.items;
         }
 
-        const parsed = JSON.parse(output);
-
-        return parsed.items || [];
+        return [];
     } catch (error) {
-        console.error("❌ Description generation error:", error);
-        throw error;
+        console.error(
+            "Nova description generation failed:",
+            error
+        );
+
+        return [];
     }
 }

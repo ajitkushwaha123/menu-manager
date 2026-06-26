@@ -18,7 +18,7 @@ import { Wand2, Loader2 } from "lucide-react";
 import axios from "axios";
 import { toast } from "sonner";
 import { useDispatch } from "react-redux";
-import { fetchMenu } from "@/store/slices/menuSlice";
+import { fetchMenu, queuePriceUpdates } from "@/store/slices/menuSlice";
 import { useSearchParams, usePathname } from "next/navigation";
 
 export default function AiPriceAdjustButton({ explicitResId, explicitPlatform }) {
@@ -46,11 +46,14 @@ export default function AiPriceAdjustButton({ explicitResId, explicitPlatform })
       });
 
       if (data.success) {
-        toast.success(`Successfully updated ${data.updated_items} items.`);
+        toast.success(`Updated ${data.updated_items} item prices.`);
         setOpen(false);
         setValue("");
-        // Refetch menu to reflect updated prices
-        dispatch(fetchMenu({ resId, platform }));
+
+        // Refetch menu so state has the new prices, then queue all synced items for Swiggy update
+        await dispatch(fetchMenu({ resId, platform })).unwrap();
+        dispatch(queuePriceUpdates());
+        toast.success(`Queued ${data.updated_items} items for Swiggy price sync.`, { id: "price-queue" });
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to adjust prices");

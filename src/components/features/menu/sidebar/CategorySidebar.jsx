@@ -3,12 +3,14 @@ import { Button } from "@/components/ui/button";
 import { useMenu } from "@/store/hooks/useMenu";
 import { useMemo, useState, useEffect } from "react";
 import InlineInput from "@/components/ui/inline-input";
-import { Plus } from "lucide-react";
+import { Plus, Layers, Ticket } from "lucide-react";
 import CategoryCard from "./CategoryCard";
 
 export default function CategorySidebar({
     resId,
     platform,
+    activeView,
+    setActiveView,
 }) {
     const {
         menu,
@@ -26,6 +28,20 @@ export default function CategorySidebar({
         queueAll,
         queueCategory
     } = useMenu(resId, platform);
+
+    const handleSetActiveCategory = (catId) => {
+        if (setActiveView) {
+            setActiveView("MENU");
+        }
+        setActiveCategory(catId);
+    };
+
+    const handleSetActiveSubCategory = (subId) => {
+        if (setActiveView) {
+            setActiveView("MENU");
+        }
+        setActiveSubCategory(subId);
+    };
 
     const [search, setSearch] = useState("");
     const [expandedCategory, setExpandedCategory] = useState(null);
@@ -133,6 +149,35 @@ export default function CategorySidebar({
                 )}
             </div>
 
+            {setActiveView && (
+                <div className="px-5 py-3 border-b border-border/50 bg-slate-50/30 shrink-0">
+                    <div className="grid grid-cols-2 gap-1 p-1 bg-gray-100 rounded-lg">
+                        <button
+                            onClick={() => setActiveView("MENU")}
+                            className={`flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all ${
+                                activeView === "MENU"
+                                    ? "bg-white text-gray-900 shadow-sm"
+                                    : "text-gray-500 hover:text-gray-950"
+                            }`}
+                        >
+                            <Layers className="w-3.5 h-3.5" />
+                            Menu Editor
+                        </button>
+                        <button
+                            onClick={() => setActiveView("TICKETS")}
+                            className={`flex items-center justify-center gap-2 py-1.5 text-xs font-semibold rounded-md transition-all ${
+                                activeView === "TICKETS"
+                                    ? "bg-white text-gray-900 shadow-sm"
+                                    : "text-gray-500 hover:text-gray-950"
+                            }`}
+                        >
+                            <Ticket className="w-3.5 h-3.5" />
+                            Swiggy Tickets
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <div className="flex-1 overflow-y-auto w-full">
                 <div className="space-y-2 p-3 pb-8">
                     {filteredCategories.map((category, index) => (
@@ -150,8 +195,8 @@ export default function CategorySidebar({
                             setEditingSubCategory={setEditingSubCategory}
                             setAddingSubCategoryFor={setAddingSubCategoryFor}
                             setExpandedCategory={setExpandedCategory}
-                            setActiveCategory={setActiveCategory}
-                            setActiveSubCategory={setActiveSubCategory}
+                            setActiveCategory={handleSetActiveCategory}
+                            setActiveSubCategory={handleSetActiveSubCategory}
                             updateCategory={updateCategory}
                             deleteCategory={deleteCategory}
                             addSubCategory={addSubCategory}

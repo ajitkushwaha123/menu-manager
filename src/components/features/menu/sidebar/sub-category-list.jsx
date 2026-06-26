@@ -59,8 +59,20 @@ export default function SubCategoryList({
                                             : "text-muted-foreground hover:text-foreground"
                                     )}
                                 >
-                                    <span className="block truncate">
-                                        {sub.name}
+                                    <span className="flex items-center justify-between gap-2 min-w-0">
+                                        <span className="truncate">{sub.name}</span>
+                                        {sub?.raw?.items?.length > 0 && (
+                                            <span
+                                                className={cn(
+                                                    "shrink-0 inline-flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-semibold tabular-nums transition-colors",
+                                                    isActive
+                                                        ? "bg-primary/15 text-primary"
+                                                        : "bg-muted text-muted-foreground"
+                                                )}
+                                            >
+                                                {sub?.raw?.items?.length}
+                                            </span>
+                                        )}
                                     </span>
                                 </button>
 

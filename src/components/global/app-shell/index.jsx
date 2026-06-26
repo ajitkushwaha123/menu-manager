@@ -7,8 +7,23 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { store } from "@/store";
 import { SiteHeader } from "@/components/site-header";
+import { usePathname } from "next/navigation";
 
 const AppShell = ({ children }) => {
+  const pathname = usePathname();
+
+  if (pathname === "/zomato-to-swiggy") {
+    return (
+      <ClerkProvider>
+        <Provider store={store}>
+          <main className="min-h-screen w-full bg-background overflow-hidden">{children}</main>
+        </Provider>
+      </ClerkProvider>
+    );
+  }
+
+  const isHiddenSidebar = typeof window !== "undefined" && window.location.search.includes("hideSidebar=true");
+
   return (
     <ClerkProvider>
       <Provider store={store}>
@@ -19,7 +34,7 @@ const AppShell = ({ children }) => {
           }}
         >
           <div className="flex min-h-screen w-full">
-            <AppSidebar variant="inset" />
+            {!isHiddenSidebar && <AppSidebar variant="inset" />}
 
             <SidebarInset className="flex flex-1 flex-col min-w-0">
               <React.Suspense fallback={null}>

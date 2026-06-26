@@ -146,6 +146,16 @@ const data = {
       url: "/menu/compare",
       icon: Frame,
     },
+    {
+      name: "Upload",
+      url: "/upload",
+      icon: Frame
+    },
+    {
+      name: "Requests",
+      url: "/requests",
+      icon: Frame
+    }
   ],
 };
 

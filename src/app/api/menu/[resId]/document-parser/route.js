@@ -1,5 +1,6 @@
 import path from "path";
 import document from "@/model/document";
+import Menu from "@/model/menu";
 import dbConnect from "@/lib/dbConnect";
 import { uploadToS3 } from "@/services/s3";
 import { NextResponse } from "next/server";
@@ -15,6 +16,7 @@ export async function POST(request, { params }) {
 
         const formData = await request.formData();
         const file = formData.get("file");
+        const name = formData.get("name") || "";
         console.log("file", file)
         if (!file) {
             return NextResponse.json(
@@ -100,6 +102,9 @@ export async function POST(request, { params }) {
                     originalPdf: pdfUpload.url,
                     createdAt: new Date(),
                 },
+                $set: {
+                    totalPages: pages.length,
+                },
                 $push: {
                     pages: {
                         $each: pageDocuments,
@@ -109,6 +114,18 @@ export async function POST(request, { params }) {
             {
                 upsert: true,
             }
+        );
+
+        await Menu.updateOne(
+            { resId, platform: 'auto' },
+            { 
+                $setOnInsert: { 
+                    resId, 
+                    name, 
+                    platform: 'auto' 
+                } 
+            },
+            { upsert: true }
         );
 
         return NextResponse.json({

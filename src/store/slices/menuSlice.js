@@ -156,6 +156,7 @@ const initialState = {
     activeImageSearchItem: null,
     isImageSidebarOpen: false,
     copiedItem: null,
+    ticketImageUpdates: {},
 };
 
 const menuSlice = createSlice({
@@ -490,7 +491,81 @@ const menuSlice = createSlice({
                     });
                 });
             });
-        }
+        },
+
+        /**
+         * After a bulk AI price update, queue only the price-changed items
+         * (those with a Swiggy ID) as "update" actions.
+         * Only price and variant prices are carried — nothing else changes.
+         */
+        queuePriceUpdates: (state) => {
+            state.menu.forEach(c => {
+                c.sub_category?.forEach(s => {
+                    s.items?.forEach(i => {
+                        // Only queue items that have a Swiggy ID (previously synced)
+                        if (!i.id) return;
+
+                        const existingItem = state.updated_menu.items.find(e => e.id === i.id);
+
+                        // Build a price-only update payload
+                        const entry = {
+                            id: i.id,
+                            categoryId: c.id,
+                            categoryName: c.name,
+                            subCategoryId: s.id,
+                            subCategoryName: s.name,
+                            price: i.price,
+                            variants: i.variants || [],
+                            // If item was already in queue with a different action, preserve it;
+                            // otherwise mark as update (price only)
+                            action: existingItem?.action === "create" ? "create" : "update",
+                        };
+
+                        upsertUpdatedMenuEntry(state.updated_menu.items, entry, i);
+                    });
+                });
+            });
+        },
+
+        /**
+         * Queues a specific array of items directly.
+         * Used when the backend returns exactly which items were updated (e.g. AI modify price).
+         */
+        queueSpecificItems: (state, action) => {
+            const items = action.payload;
+            if (!Array.isArray(items)) return;
+
+            items.forEach(item => {
+                const existingItem = state.updated_menu.items.find(e => e.id === item.id);
+                
+                const entry = {
+                    id: item.id,
+                    categoryId: item.categoryId,
+                    categoryName: item.categoryName,
+                    subCategoryId: item.subCategoryId,
+                    subCategoryName: item.subCategoryName,
+                    price: item.price,
+                    variants: item.variants || [],
+                    // If item was already in queue with a different action, preserve it;
+                    // otherwise mark as update (price only)
+                    action: existingItem?.action === "create" ? "create" : "update"
+                };
+                
+                upsertUpdatedMenuEntry(state.updated_menu.items, entry, item);
+            });
+        },
+        setTicketImage: (state, action) => {
+            const { ticketId, url } = action.payload;
+            if (!state.ticketImageUpdates) {
+                state.ticketImageUpdates = {};
+            }
+            state.ticketImageUpdates[ticketId] = url;
+        },
+        clearTicketImage: (state, action) => {
+            if (state.ticketImageUpdates) {
+                delete state.ticketImageUpdates[action.payload];
+            }
+        },
     },
 
     extraReducers: (builder) => {
@@ -554,7 +629,11 @@ export const {
     markMenuUpdatesDone,
     queueAll,
     queueCategory,
-    setCopiedItem
+    queuePriceUpdates,
+    queueSpecificItems,
+    setCopiedItem,
+    setTicketImage,
+    clearTicketImage
 } = menuSlice.actions;
 
 export default menuSlice.reducer;

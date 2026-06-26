@@ -2,7 +2,16 @@ import Menu from "@/model/menu";
 import dbConnect from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
-const ROUND_TO = 1;
+/**
+ * Rounds a price to the nearest value ending in 9.
+ * Examples: 105 → 109, 112 → 109, 115 → 119, 100 → 99, 220 → 219
+ */
+function roundToNearest9(price) {
+    const lower = Math.floor((price - 9) / 10) * 10 + 9;
+    const upper = lower + 10;
+    const result = (price - lower) <= (upper - price) ? lower : upper;
+    return Math.max(9, result); // minimum price of 9
+}
 
 export async function POST(req, { params }) {
     try {
@@ -96,17 +105,10 @@ export async function POST(req, { params }) {
                                         numericValue;
                                 }
 
-                                newPrice = Math.max(
-                                    0,
-                                    newPrice
+                                item.price = roundToNearest9(
+                                    Math.max(0, newPrice)
                                 );
 
-                                item.price =
-                                    Math.round(
-                                        newPrice /
-                                        ROUND_TO
-                                    ) * ROUND_TO;
-                                    
                                 isUpdated = true;
                             }
 
@@ -122,8 +124,9 @@ export async function POST(req, { params }) {
                                                 } else {
                                                     newOptPrice = currentOptPrice + numericValue;
                                                 }
-                                                newOptPrice = Math.max(0, newOptPrice);
-                                                opt.price = Math.round(newOptPrice / ROUND_TO) * ROUND_TO;
+                                                opt.price = roundToNearest9(
+                                                    Math.max(0, newOptPrice)
+                                                );
                                                 isUpdated = true;
                                             }
                                         });
@@ -145,11 +148,9 @@ export async function POST(req, { params }) {
 
         return NextResponse.json({
             success: true,
-            mode: isPercentage
-                ? "percentage"
-                : "absolute",
+            mode: isPercentage ? "percentage" : "absolute",
             value: adjustment,
-            rounded_to: ROUND_TO,
+            rounding: "nearest_9",
             updated_items: updatedCount,
         });
     } catch (error) {

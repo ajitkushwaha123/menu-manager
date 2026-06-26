@@ -1,66 +1,49 @@
-import { VertexAI } from "@google-cloud/vertexai";
+import { safeParseModelJson } from "@/lib/json-parser"
+import { BedrockRuntimeClient, ConverseCommand } from "@aws-sdk/client-bedrock-runtime";
+// Initialize the Bedrock Runtime client
+const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
-const vertexAI = new VertexAI({
-    project: 'advance-maker-499006-k7',
-    location: 'us-central1'
-});
-
-const generativeModel = vertexAI.getGenerativeModel({
-    model: "gemini-2.5-flash",
-});
-
+// Strict JSON Schema format accepted by Amazon Bedrock Tool Configuration
 const menuSchema = {
-    type: "OBJECT",
+    type: "object",
     properties: {
         categories: {
-            type: "ARRAY",
+            type: "array",
             items: {
-                type: "OBJECT",
+                type: "object",
                 properties: {
-                    name: { type: "STRING" },
+                    name: { type: "string" },
                     sub_category: {
-                        type: "ARRAY",
+                        type: "array",
                         items: {
-                            type: "OBJECT",
+                            type: "object",
                             properties: {
-                                name: { type: "STRING" },
+                                name: { type: "string" },
                                 items: {
-                                    type: "ARRAY",
+                                    type: "array",
                                     items: {
-                                        type: "OBJECT",
+                                        type: "object",
                                         properties: {
-                                            name: { type: "STRING" },
-
-                                            description: {
-                                                type: "STRING"
-                                            },
-
-                                            price: {
-                                                type: "NUMBER",
-                                                nullable: true
-                                            },
-
+                                            name: { type: "string" },
+                                            description: { type: "string" },
+                                            price: { type: "number" },
                                             is_veg: {
-                                                type: "STRING",
+                                                type: "string",
                                                 enum: ["VEG", "NON_VEG", "EGG", "UNKNOWN"]
                                             },
-
                                             variants: {
-                                                type: "ARRAY",
+                                                type: "array",
                                                 items: {
-                                                    type: "OBJECT",
+                                                    type: "object",
                                                     properties: {
-                                                        property_name: { type: "STRING" },
+                                                        property_name: { type: "string" },
                                                         options: {
-                                                            type: "ARRAY",
+                                                            type: "array",
                                                             items: {
-                                                                type: "OBJECT",
+                                                                type: "object",
                                                                 properties: {
-                                                                    option_name: { type: "STRING" },
-                                                                    price: {
-                                                                        type: "NUMBER",
-                                                                        nullable: true
-                                                                    }
+                                                                    option_name: { type: "string" },
+                                                                    price: { type: "number" }
                                                                 },
                                                                 required: ["option_name"]
                                                             }
@@ -85,111 +68,257 @@ const menuSchema = {
     required: ["categories"]
 };
 
-export async function extractMenuFromImage(imageUrl) {
-    try {
-        const prompt = `
-You are a world-class restaurant menu extraction system.
-Your job is to extract structured menu data from a restaurant PDF/image.
-========================
-RULES (VERY IMPORTANT)
-========================
+/**
+ * Extracts a restaurant menu structure from an image OR PDF buffer using Amazon Nova Lite.
+ * @param {Buffer} fileBuffer - The raw asset buffer data (PDF or Image)
+ * @param {string} mimeType - The detected format (e.g., application/pdf, image/jpeg, image/png)
+ */
+export async function extractMenuFromImage(fileBuffer, mimeType = "application/pdf") {
+    // Normalize format strings
+    // Normalize format strings
+    const cleanMime = mimeType.toLowerCase().split(";")[0].trim();
 
-1. Output ONLY valid JSON matching the provided schema.
-2. Do NOT invent or hallucinate menu items.
-3. Preserve exact category → subcategory → item hierarchy.
-4. If price is missing → set price = null.
+    let contentBlock = {};
 
-------------------------
-FIELD HANDLING RULES
-------------------------
+    // Core routing block to handle PDF split sheets vs Flat Image fallbacks
+    if (cleanMime === "application/pdf" || cleanMime.endsWith("pdf")) {
+        contentBlock = {
+            document: {
+                name: `MenuPage_${Date.now()}`,
+                format: "pdf", // Bedrock standard document type
+                source: {
+                    bytes: new Uint8Array(fileBuffer)
+                }
+            }
+        };
+    } else {
+        // Fallback processing if it's a standard image stream 
+        let imageExt = cleanMime.replace("image/", "");
+        if (imageExt === "jpg") imageExt = "jpeg";
 
-5. description:
-   - MUST ALWAYS be filled
-   - If missing in menu, GENERATE a short food description (5–12 words)
-   - Must be simple, human-friendly, and food-focused
+        const allowedFormats = ["gif", "jpeg", "png", "webp"];
+        if (!allowedFormats.includes(imageExt)) imageExt = "jpeg";
 
-   Example:
-   "Crispy chicken burger with spicy mayo and lettuce"
+        contentBlock = {
+            image: {
+                format: imageExt,
+                source: {
+                    bytes: new Uint8Array(fileBuffer)
+                }
+            }
+        };
+    }
 
-6. is_veg:
-   - Set based on visible clues:
-     - VEG → vegetarian items
-     - NON_VEG → chicken, mutton, fish, meat
-     - EGG → egg-based dishes
-     - UNKNOWN → if not clearly identifiable
-
-7. variants:
-   - Include ONLY if clearly shown in the menu
-   - If not present → return []
-
-8. options inside variants:
-   - Include ONLY if visible
-   - Otherwise omit or use empty array
-
-------------------------
-STRICT RULES
-------------------------
-
-9. NEVER leave description empty.
-10. NEVER leave is_veg empty.
-11. NEVER fabricate prices.
-12. NEVER create fake variants or options.
-13. If unsure → prefer null (only for price).
-
-------------------------
-OUTPUT RULE
-------------------------
-
-Return ONLY JSON. No explanation. No markdown. No extra text.
+    const systemPromptText = `
+You are an expert restaurant menu extraction engine. Your task is to extract menu information and pass it to the 'output_menu_json' tool configuration matching the precise schema requested. 
 `;
 
-        const pdfResponse = await fetch(imageUrl);
-        if (!pdfResponse.ok) {
-            throw new Error(`Failed to fetch PDF from URL: ${pdfResponse.statusText}`);
-        }
+    const promptText = `
+Your task is to convert the provided restaurant menu PDF/image into structured JSON. Also make sure if any item have variants then do add variants for that item them.
 
-        const arrayBuffer = await pdfResponse.arrayBuffer();
-        const base64Pdf = Buffer.from(arrayBuffer).toString("base64");
+==================================================
+ABSOLUTE REQUIREMENTS
+==================================================
+1. Do not hallucinate menu items.
+2. Preserve all visible prices exactly.
+3. Preserve category hierarchy whenever possible.
 
-        const response = await generativeModel.generateContent({
-            contents: [
+==================================================
+CATEGORY DETECTION RULES
+==================================================
+Categories are menu sections such as: Rice, Biryani, Pizza, Soups, Starters, Main Course, Chinese, Beverages, Desserts.
+Subcategories are actual food groups.
+Example:
+Chinese
+ ├── Fried Rice
+ ├── Noodles
+
+==================================================
+CRITICAL VARIANT DETECTION RULES
+==================================================
+The following are NEVER categories/subcategories: HALF, FULL, SMALL, MEDIUM, LARGE, REGULAR, MINI, QUARTER, HALF PLATE, FULL PLATE, 250ML, 500ML, 750ML, 1LTR, 1L, 2L.
+These ALWAYS represent variants. If you detect sections categorized under these keys, merge matching items together and generate variants instead.
+
+If you see:
+JEERA RICE
+HALF 70
+FULL 110
+
+Output Option Array Structure:
+- HALF -> 70
+- FULL -> 110
+
+==================================================
+DESCRIPTION RULES
+==================================================
+description is mandatory. If missing from the physical menu, generate a concise food description between 5 to 12 words.
+
+==================================================
+VEG DETECTION RULES
+==================================================
+Set: VEG, NON_VEG, EGG, UNKNOWN based on menu headers, markers, or item names.
+
+==================================================
+PRICE RULES
+==================================================
+If an item has variants, "price" should equal the minimum variant price also it is mandatory to define the variants if exists "variants": [
                 {
-                    role: "user",
-                    parts: [
-                        { text: prompt },
-                        {
-                            inlineData: {
-                                data: base64Pdf,
-                                mimeType: "application/pdf"
-                            },
-                        },
-                    ],
-                },
-            ],
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: menuSchema,
-                temperature: 0.1,
-            },
-        });
+                  "property_name": "Portion",
+                  "options": [
+                    { "option_name": "Half", "price": 70 },
+                    { "option_name": "Full", "price": 110 }
+                  ]
+                }
+              ] . Never use 0 or null.
 
-        const output = response.response.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            
+==================================================
+VARIANTS RULES
+==================================================
 
-        if (!output) {
-            throw new Error("Empty response from Gemini via Vertex AI");
+Show vairants only if a items has more that one vairants here is the sample for it {
+                  "property_name": "Portion",
+                  "options": [
+                    { "option_name": "Half", "price": 70 },
+                    { "option_name": "Full", "price": 110 }
+                  ]
+                }
+
+==================================================
+OUTPUT FORMAT
+==================================================
+You MUST structure your JSON output EXACTLY like this example. The root object MUST contain a "categories" array.
+Return ONLY MINIFIED JSON. No whitespace, no newlines.
+{
+  "categories": [
+    {
+      "name": "Main Course",
+      "sub_category": [
+        {
+          "name": "Rice Dishes",
+          "items": [
+            {
+              "name": "Jeera Rice",
+              "description": "Basmati rice cooked with cumin seeds",
+              "price": 70,
+              "is_veg": "VEG",
+              "variants": [
+                {
+                  "property_name": "Portion",
+                  "options": [
+                    { "option_name": "Half", "price": 70 },
+                    { "option_name": "Full", "price": 110 }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+`;
+
+    const commandInput = {
+        modelId: "amazon.nova-lite-v1:0",
+        system: [
+            {
+                text: systemPromptText
+            }
+        ],
+        messages: [
+            {
+                role: "user",
+                content: [
+                    contentBlock,
+                    {
+                        text: promptText
+                    }
+                ]
+            }
+        ],
+        inferenceConfig: {
+            maxTokens: 10000,
+            temperature: 0.1
+        }
+    };
+
+    try {
+        const command = new ConverseCommand(commandInput);
+
+        const response = await bedrockClient.send(command);
+
+        const content =
+            response?.output?.message?.content || [];
+
+        console.log(
+            "Nova Response:",
+            JSON.stringify(content, null, 2)
+        );
+
+        /*
+        ---------------------------------------------------
+        FIRST PRIORITY
+        TOOL OUTPUT
+        ---------------------------------------------------
+        */
+
+        const toolBlock = content.find(
+            block => block.toolUse
+        );
+
+        if (toolBlock?.toolUse?.input) {
+            return toolBlock.toolUse.input;
         }
 
-        let parsed;
-        try {
-            parsed = JSON.parse(output);
-        } catch (err) {
-            console.error("❌ Invalid JSON from Gemini:\n", output);
-            throw new Error("Failed to parse Gemini response");
+        /*
+        ---------------------------------------------------
+        SECOND PRIORITY
+        RAW TEXT RECOVERY
+        ---------------------------------------------------
+        */
+
+        const rawText = content
+            .map(block => {
+                if (block.text) {
+                    return block.text;
+                }
+
+                if (block.toolUse?.input) {
+                    return JSON.stringify(
+                        block.toolUse.input
+                    );
+                }
+
+                return "";
+            })
+            .join("\n");
+
+        const recovered =
+            safeParseModelJson(rawText);
+
+        if (recovered) {
+            console.log(
+                "Recovered JSON from truncated response"
+            );
+
+            return recovered;
         }
 
-        return parsed;
+        return {
+            categories: []
+        };
     } catch (error) {
-        console.error("❌ Menu extraction error:", error);
-        throw error;
+        console.error(
+            "Failed handling Nova Lite processing orchestration step:",
+            error
+        );
+
+        return {
+            categories: [],
+            error: true,
+            message: error.message
+        };
     }
 }
