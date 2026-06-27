@@ -12,7 +12,7 @@
     "start:worker": "node ./src/lib/bullmq/worker/index.js",
     "start:swiggy": "node ./src/lib/bullmq/worker/swiggy-worker.js",
     "start:dashboard": "node ./bull-server/dashboard.js",
-    "dev": "concurrently -n \"NEXT,SWIGGY,DASHBOARD,ELECTRON\" -c \"bgBlue.bold,bgGreen.bold,bgMagenta.bold,bgYellow.bold\" \"npm run next:dev\" \"npm run start:swiggy\" \"npm run start:dashboard\" \"npm run electron:dev\"",
+    "dev": "concurrently -n \"NEXT,SWIGGY,DASHBOARD,WORKER\" -c \"bgBlue.bold,bgGreen.bold,bgMagenta.bold,bgYellow.bold\" \"npm run next:dev\" \"npm run start:swiggy\" \"npm run start:dashboard\" \"npm run start:worker\"",
     "build:app": "npm run build && node copy-standalone.js && electron-builder --win"
   },
   "build": {

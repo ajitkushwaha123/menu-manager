@@ -85,7 +85,16 @@ export default function SwiggyTicketsViewer({ resId }) {
       if (!cardRef) continue;
       const payload = cardRef.getPayload?.();
       if (!payload) { skipped++; continue; }
-      dispatch(addItem(payload));
+      
+      // ONLY queue items that were updated
+      if (!payload.isUpdated) {
+        skipped++;
+        continue;
+      }
+      
+      // Remove isUpdated flag before dispatching
+      const { isUpdated, ...finalPayload } = payload;
+      dispatch(addItem(finalPayload));
       queued++;
     }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
+import { useState, useEffect, forwardRef , useRef , useImperativeHandle } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
@@ -57,6 +57,47 @@ const TicketCard = forwardRef(function TicketCard({ ticket }, ref) {
 
   const ticketSubCatId = item?.sub_category_id;
 
+  const initialVariantsStr = useRef(JSON.stringify(
+    variantGroups.map(group => ({
+      property_name: group.variant_group?.name || "",
+      options: (group.variants_vo || []).map(opt => ({
+        option_name: opt.variant?.name || "",
+        price: opt.variant?.price || 0,
+        is_default: opt.variant?.default === 1,
+      }))
+    }))
+  ));
+
+  const [isUpdated, setIsUpdated] = useState(false);
+
+  useEffect(() => {
+    const currentVariantsStr = JSON.stringify(
+      variants.map(v => ({
+        property_name: v.property_name,
+        options: (v.options || []).map(o => ({
+          option_name: o.option_name,
+          price: o.price,
+          is_default: o.is_default || false,
+        }))
+      }))
+    );
+
+    const initialVeg = isVeg ? "VEG" : (item?.item?.is_veg || "NONVEG");
+    
+    if (
+      name !== itemName ||
+      price !== itemPrice ||
+      description !== itemDesc ||
+      isVegState !== initialVeg ||
+      imageUrlState !== imageUrl ||
+      currentVariantsStr !== initialVariantsStr.current
+    ) {
+      setIsUpdated(true);
+    } else {
+      setIsUpdated(false);
+    }
+  }, [name, price, description, isVegState, imageUrlState, variants, itemName, itemPrice, itemDesc, isVeg, imageUrl]);
+
   useEffect(() => {
     if (menuList.length > 0) {
       let foundCatId = "";
@@ -105,6 +146,7 @@ const TicketCard = forwardRef(function TicketCard({ ticket }, ref) {
     getPayload: () => {
       if (!selectedSubCategoryId) return null;
       return {
+        isUpdated,
         subCategoryId: selectedSubCategoryId,
         item: {
           name,
@@ -127,7 +169,7 @@ const TicketCard = forwardRef(function TicketCard({ ticket }, ref) {
       };
     },
     getItemName: () => name,
-  }), [selectedSubCategoryId, name, price, description, isVegState, imageUrlState, variants, item]);
+  }), [selectedSubCategoryId, name, price, description, isVegState, imageUrlState, variants, item, isUpdated]);
 
   // Variant helpers
   const addOption = (gIdx) => {
@@ -234,23 +276,55 @@ const TicketCard = forwardRef(function TicketCard({ ticket }, ref) {
 
             <div className="flex-1 min-w-0 space-y-2">
               <div className="flex items-start justify-between gap-3">
-                <div className="flex-1 flex items-center gap-2 min-w-0">
-                  <select
-                    value={isVegState}
-                    onChange={(e) => setIsVegState(e.target.value)}
-                    className="text-xs font-semibold px-2 py-1 rounded border border-gray-300 outline-none bg-white cursor-pointer shrink-0"
-                  >
-                    <option value="VEG">VEG</option>
-                    <option value="NONVEG">NONVEG</option>
-                    <option value="EGG">EGG</option>
-                  </select>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Item Name"
-                    className="flex-1 min-w-0 font-semibold text-base outline-none border-b border-gray-200 hover:border-gray-400 focus:border-primary px-1"
-                  />
+                <div className="flex-1 flex flex-col gap-1.5 min-w-0">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <select
+                      value={isVegState}
+                      onChange={(e) => setIsVegState(e.target.value)}
+                      className="text-xs font-semibold px-2 py-1 rounded border border-gray-300 outline-none bg-white cursor-pointer shrink-0"
+                    >
+                      <option value="VEG">VEG</option>
+                      <option value="NONVEG">NONVEG</option>
+                      <option value="EGG">EGG</option>
+                    </select>
+                    <input
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Item Name"
+                      className="flex-1 min-w-0 font-semibold text-base outline-none border-b border-gray-200 hover:border-gray-400 focus:border-primary px-1"
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-0.5">
+                    {[
+                      { label: "Mock Meat", append: " - Mock Meat" },
+                      { label: '🍕 6"', append: " - 6 INCH" },
+                      { label: '🍕 7"', append: " - 7 INCH" },
+                      { label: '🍕 8"', append: " - 8 INCH" },
+                      { label: "4 pc", append: " - 4 PCS" },
+                      { label: "5 pc", append: " - 5 PCS" },
+                      { label: "6 pc", append: " - 6 PCS" },
+                      { label: "S", append: " - SMALL" },
+                      { label: "M", append: " - MEDIUM" },
+                      { label: "L", append: " - LARGE" },
+                      { label: "200ML", append: " - 200 ML" },
+                      { label: "300ML", append: " - 300 ML" },
+                      { label: "500ML", append: " - 500 ML" },
+                      { label: "100G", append: " - 100 G" },
+                      { label: "300G", append: " - 300 G" },
+                      { label: "500G", append: " - 500 G" },
+                      { label: "1KG", append: " - 1 KG" },
+                    ].map((tag) => (
+                      <button
+                        key={tag.label}
+                        type="button"
+                        onClick={() => setName((prev) => (prev + tag.append).trimStart())}
+                        className="inline-flex items-center px-1.5 py-0.5 rounded border border-gray-200 bg-gray-50 hover:bg-primary/10 hover:border-primary/40 hover:text-primary text-[9px] font-medium text-gray-600 transition-colors cursor-pointer select-none"
+                      >
+                        {tag.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 <Badge
                   variant="outline"
