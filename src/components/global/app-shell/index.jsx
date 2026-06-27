@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 const AppShell = ({ children }) => {
   const pathname = usePathname();
 
-  if (pathname === "/zomato-to-swiggy") {
+  if (pathname === "/zomato-to-swiggy" || pathname === "/login") {
     return (
       <ClerkProvider>
         <Provider store={store}>
