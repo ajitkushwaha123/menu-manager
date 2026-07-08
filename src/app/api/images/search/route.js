@@ -4,7 +4,6 @@ const SEARCH_API = "https://manager.foodsnap.in/api/image/search";
 
 function extractResults(payload) {
   if (!payload) return [];
-
   return (
     payload.data ||
     payload.results ||
@@ -15,58 +14,13 @@ function extractResults(payload) {
 }
 
 export async function GET(req) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 5000);
-
   try {
     const { searchParams } = new URL(req.url);
 
-    const query = searchParams.get("q")?.trim();
-
-    if (!query) {
-      return NextResponse.json({
-        success: true,
-        data: [],
-        query: "",
-        page: 1,
-        limit: 12,
-        total: 0,
-        hasMore: false,
-        pagination: {
-          totalCount: 0,
-          currentPage: 1,
-          totalPages: 0,
-          limit: 12,
-        },
-      });
-    }
-
-    const page = Math.max(
-      1,
-      Number.parseInt(searchParams.get("page") ?? "1", 10),
-    );
-
-    const limit = Math.min(
-      60,
-      Math.max(1, Number.parseInt(searchParams.get("limit") ?? "12", 10)),
-    );
-
-    // Platform detection: defaults to swiggy
-    const platform = searchParams.get("platform") ?? "swiggy";
-
     const url = new URL(SEARCH_API);
-
-    url.searchParams.set("q", query);
-    url.searchParams.set("page", String(page));
-    url.searchParams.set("limit", String(limit));
-
-    // Only pass approved=true for Zomato, skip for Swiggy
-    if (platform === "zomato") {
-      url.searchParams.set("approved", "true");
-    }
+    url.search = searchParams.toString();
 
     const response = await fetch(url.toString(), {
-      signal: controller.signal,
       cache: "no-store",
       headers: {
         Accept: "application/json",
@@ -74,64 +28,46 @@ export async function GET(req) {
     });
 
     if (!response.ok) {
-      console.error(
-        `Search API failed: ${response.status} ${response.statusText}`,
-      );
-
+      console.error(`Search API failed: ${response.status} ${response.statusText}`);
       return NextResponse.json(
-        {
-          success: false,
-          message: "Search service unavailable",
-        },
-        {
-          status: response.status,
-        },
+        { success: false, message: "Search service unavailable" },
+        { status: response.status }
       );
     }
 
     const payload = await response.json();
     const results = extractResults(payload);
+    
+    console.log("=== API DEBUG ===");
+    console.log("Query:", searchParams.get("q"));
+    console.log("Upstream payload keys:", Object.keys(payload));
+    console.log("Extracted results length:", results?.length);
+    console.log("Has data array?", Array.isArray(payload.data));
+    console.log("Has results array?", Array.isArray(payload.results));
+    console.log("=================");
 
-    return NextResponse.json(
-      {
-        success: true,
-        query: payload.query ?? query,
-        data: results,
-        page: payload.page ?? page,
-        limit: payload.limit ?? limit,
-        total: payload.total ?? results.length,
-        hasMore: payload.hasMore ?? false,
-        pagination: payload.pagination ?? {
-          totalCount: payload.total ?? results.length,
-          currentPage: payload.page ?? page,
-          totalPages: Math.ceil(
-            (payload.total ?? results.length) / (payload.limit ?? limit),
-          ),
-          limit: payload.limit ?? limit,
-        },
+    // The upstream API returns varying formats. 
+    // We normalize it here so the frontend always gets exactly what it expects.
+    return NextResponse.json({
+      success: payload.success ?? true,
+      query: payload.query ?? searchParams.get("q"),
+      data: results,
+      page: payload.page ?? payload.pagination?.page ?? 1,
+      limit: payload.limit ?? payload.pagination?.limit ?? 12,
+      total: payload.total ?? payload.pagination?.total ?? results.length,
+      hasMore: payload.hasMore ?? payload.pagination?.hasNextPage ?? false,
+      message: payload.message || null,
+    }, {
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
       },
-      {
-        headers: {
-          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
-        },
-      },
-    );
+    });
   } catch (error) {
     console.error("Search Route Error:", error);
-
     return NextResponse.json(
-      {
-        success: false,
-        message:
-          error?.name === "AbortError"
-            ? "Search request timed out"
-            : "Failed to search images",
-      },
-      {
-        status: error?.name === "AbortError" ? 504 : 500,
-      },
+      { success: false, message: "Failed to search images" },
+      { status: 500 }
     );
-  } finally {
-    clearTimeout(timeout);
   }
 }
+

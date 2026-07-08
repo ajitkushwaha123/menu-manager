@@ -117,7 +117,7 @@ const upsertUpdatedMenuEntry = (entries, entry, fullItem = null) => {
     const itemToValidate = fullItem || entry;
     if ('price' in itemToValidate || 'description' in itemToValidate || 'is_veg' in itemToValidate) {
 
-        if (entry.action !== 'delete' && !isItemValid(itemToValidate)) {
+        if (entry.action === 'create' && !isItemValid(itemToValidate)) {
             const idx = entries.findIndex(i => i.id === entry.id);
             if (idx >= 0) entries.splice(idx, 1);
             return;
@@ -537,7 +537,7 @@ const menuSlice = createSlice({
 
             items.forEach(item => {
                 const existingItem = state.updated_menu.items.find(e => e.id === item.id);
-                
+
                 const entry = {
                     id: item.id,
                     categoryId: item.categoryId,
@@ -550,7 +550,7 @@ const menuSlice = createSlice({
                     // otherwise mark as update (price only)
                     action: existingItem?.action === "create" ? "create" : "update"
                 };
-                
+
                 upsertUpdatedMenuEntry(state.updated_menu.items, entry, item);
             });
         },

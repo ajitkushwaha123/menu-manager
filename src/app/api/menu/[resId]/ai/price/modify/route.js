@@ -38,7 +38,8 @@ export async function POST(req, { params }) {
         // Flatten current menu into simplified context for the AI
         // Do NOT send the old prices or variants, otherwise the AI might just regurgitate them.
         const currentItemsContext = [];
-        menu.menu?.forEach((category) => {
+        const categories = Array.isArray(menu?.menu) ? menu.menu : menu?.menu?.categories || [];
+        categories.forEach((category) => {
             category.sub_category?.forEach((subCategory) => {
                 subCategory.items?.forEach((item) => {
                     currentItemsContext.push({
@@ -71,7 +72,9 @@ export async function POST(req, { params }) {
         const updatedItems = [];
         let updatedCount = 0;
 
-        menu.menu?.forEach((category) => {
+        const categoriesForUpdate = Array.isArray(menu?.menu) ? menu.menu : menu?.menu?.categories || [];
+
+        categoriesForUpdate.forEach((category) => {
             category.sub_category?.forEach((subCategory) => {
                 subCategory.items?.forEach((item) => {
                     const aiMatch = updatedAiItems.find(aiItem => aiItem.id === item.id);

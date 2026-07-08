@@ -5,68 +5,122 @@ const bedrockClient = new BedrockRuntimeClient({ region: "us-east-1" });
 
 // Strict JSON Schema format accepted by Amazon Bedrock Tool Configuration
 const menuSchema = {
-    type: "object",
-    properties: {
-        categories: {
-            type: "array",
-            items: {
-                type: "object",
-                properties: {
-                    name: { type: "string" },
-                    sub_category: {
-                        type: "array",
-                        items: {
-                            type: "object",
-                            properties: {
-                                name: { type: "string" },
-                                items: {
-                                    type: "array",
-                                    items: {
-                                        type: "object",
-                                        properties: {
-                                            name: { type: "string" },
-                                            description: { type: "string" },
-                                            price: { type: "number" },
-                                            is_veg: {
-                                                type: "string",
-                                                enum: ["VEG", "NON_VEG", "EGG", "UNKNOWN"]
+    "type": "object",
+    "properties": {
+        "categories": {
+            "type": "array",
+            "description": "List of menu categories",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Category name"
+                    },
+                    "sub_category": {
+                        "type": "array",
+                        "description": "List of subcategories",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Subcategory name"
+                                },
+                                "items": {
+                                    "type": "array",
+                                    "description": "Menu items",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "description": "Item name"
                                             },
-                                            variants: {
-                                                type: "array",
-                                                items: {
-                                                    type: "object",
-                                                    properties: {
-                                                        property_name: { type: "string" },
-                                                        options: {
-                                                            type: "array",
-                                                            items: {
-                                                                type: "object",
-                                                                properties: {
-                                                                    option_name: { type: "string" },
-                                                                    price: { type: "number" }
+                                            "description": {
+                                                "type": "string",
+                                                "description": "Item description"
+                                            },
+                                            "price": {
+                                                "type": "number",
+                                                "description": "Base price of the item"
+                                            },
+                                            "is_veg": {
+                                                "type": "string",
+                                                "enum": ["VEG", "NON_VEG", "EGG"],
+                                                "description": "Food type"
+                                            },
+                                            "variants": {
+                                                "type": "array",
+                                                "description": "Customization groups",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "property_name": {
+                                                            "type": "string",
+                                                            "description": "Variant group name"
+                                                        },
+                                                        "options": {
+                                                            "type": "array",
+                                                            "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "option_name": {
+                                                                        "type": "string",
+                                                                        "description": "Variant option name"
+                                                                    },
+                                                                    "price": {
+                                                                        "type": "number",
+                                                                        "description": "Price for this option"
+                                                                    }
                                                                 },
-                                                                required: ["option_name"]
+                                                                "required": [
+                                                                    "option_name",
+                                                                    "price"
+                                                                ],
+                                                                "additionalProperties": false
                                                             }
                                                         }
                                                     },
-                                                    required: ["property_name"]
+                                                    "required": [
+                                                        "property_name",
+                                                        "options"
+                                                    ],
+                                                    "additionalProperties": false
                                                 }
                                             }
                                         },
-                                        required: ["name"]
+                                        "required": [
+                                            "name",
+                                            "description",
+                                            "price",
+                                            "is_veg"
+                                        ],
+                                        "additionalProperties": false
                                     }
                                 }
                             },
-                            required: ["name", "items"]
+                            "required": [
+                                "name",
+                                "items"
+                            ],
+                            "additionalProperties": false
                         }
                     }
                 },
-                required: ["name", "sub_category"]
+                "required": [
+                    "name",
+                    "sub_category"
+                ],
+                "additionalProperties": false
             }
         }
     },
-    required: ["categories"]
-};
+    "required": [
+        "categories"
+    ],
+    "additionalProperties": false
+}
 
 /**
  * Extracts a restaurant menu structure from an image OR PDF buffer using Amazon Nova Lite.
@@ -122,6 +176,8 @@ ABSOLUTE REQUIREMENTS
 1. Do not hallucinate menu items.
 2. Preserve all visible prices exactly.
 3. Preserve category hierarchy whenever possible.
+4. EVERY item MUST belong to a subcategory. Do not skip the subcategory level. If a category has no explicit subcategories, use "General" or the category name itself as the subcategory name.
+5. NEVER make a single food item (e.g. "Jeera Rice") into a subcategory. Food items must ALWAYS be inside the "items" array.
 
 ==================================================
 CATEGORY DETECTION RULES

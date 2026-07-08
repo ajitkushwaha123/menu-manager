@@ -49,6 +49,8 @@ export async function POST(request) {
                 input: {
                     username: body.username,
                     password: body.password,
+                    // username: 1397507,
+                    // password: 968052,
                     accept_tnc: true,
                     existing_user: true,
                     include_dineout: true,
@@ -57,6 +59,8 @@ export async function POST(request) {
                 },
             },
         };
+
+        // 1397507 , 968052
 
         const loginResp = await axios.post(
             `${process.env.NEXT_PUBLIC_SWIGGY_API}/query?mutation=loginMutation`,

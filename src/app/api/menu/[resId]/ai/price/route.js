@@ -77,7 +77,8 @@ export async function POST(req, { params }) {
         }
 
         let updatedCount = 0;
-        menu.menu?.forEach((category) => {
+        const categories = Array.isArray(menu?.menu) ? menu.menu : menu?.menu?.categories || [];
+        categories.forEach((category) => {
             category.sub_category?.forEach(
                 (subCategory) => {
                     subCategory.items?.forEach(

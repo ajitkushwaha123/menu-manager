@@ -17,7 +17,7 @@ const connection = new Redis(process.env.REDIS_URL, {
 });
 
 const worker = new Worker(
-    "menuParserQueue",
+    "swiggyMenuParserQueue",
     async (job) => {
         console.log(`[Job ${job.id}] 🚀 Processing restaurant ${job.data.resId}`);
 

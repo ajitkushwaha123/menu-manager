@@ -10,8 +10,9 @@ serverAdapter.setBasePath("/admin/queues");
 
 createBullBoard({
     queues: [
-        new BullMQAdapter(menuParserQueue),
         new BullMQAdapter(swiggyProcessorQueue),
+        new BullMQAdapter(menuParserQueue),
+
     ],
     serverAdapter,
 });

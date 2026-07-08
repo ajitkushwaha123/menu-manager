@@ -17,7 +17,6 @@ export async function POST(req) {
             );
         }
 
-        // 1. Fetch the remote file into an ArrayBuffer
         const fileResponse = await fetch(pdfUrl);
         if (!fileResponse.ok) {
             throw new Error(`Failed to download document asset from URL: ${pdfUrl}`);
@@ -25,10 +24,7 @@ export async function POST(req) {
         const arrayBuffer = await fileResponse.arrayBuffer();
         const imageBuffer = Buffer.from(arrayBuffer);
 
-        // 2. Extrapolate or pass the content type
         const contentType = fileResponse.headers.get("content-type") || "image/jpeg";
-
-        // 3. Pass the raw buffer data down to Bedrock
         const extractedMenu = await extractMenuFromImage(imageBuffer, contentType);
 
         const result = await Document.updateOne(
